@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="2" author="danilo.vicente">
+        <createTable tableName="funcionario">
+            <column name="id" type="char(36)">
+                <constraints primaryKey="true" primaryKeyName="pk_funcionario" nullable="false" />
+            </column>
+            <column name="nome" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="cpf" type="char(14)">
+                <constraints nullable="false" unique="true" uniqueConstraintName="uq_cpf" />
+            </column>
+            <column name="salario" type="decimal(10,2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="idade" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="data_admissao" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="empresa_id" type="char(36)">
+                <constraints nullable="false" foreignKeyName="fk_empresa" referencedTableName="empresa" referencedColumnNames="id" />
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
