@@ -36,6 +36,11 @@
 			<artifactId>liquibase-core</artifactId>
 			<version>4.2.2</version>
 		</dependency>
+		<dependency> <!-- Importação da biblioteca jpa para persistência de dados -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>2.4.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>
