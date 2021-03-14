@@ -24,5 +24,6 @@
                 <constraints nullable="false" foreignKeyName="fk_empresa" referencedTableName="empresa" referencedColumnNames="id" />
             </column>
         </createTable>
+        <addUniqueConstraint tableName="funcionario" columnNames="cpf,empresa_id" constraintName="uq_cpf_empresa" />
     </changeSet>
 </databaseChangeLog>
