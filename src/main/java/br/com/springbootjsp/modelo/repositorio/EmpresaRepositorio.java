@@ -4,10 +4,12 @@ import br.com.springbootjsp.modelo.dominio.Empresa;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
 
     @Modifying
@@ -15,7 +17,7 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
         "INSERT INTO empresa(nome,cnpj) " +
         "VALUES (?1,?2)"
     ,nativeQuery = true)
-    void insere(String nome,String cnpj,String funcionarioId);
+    void insere(String nome,String cnpj);
 
     @Modifying
     @Query(value =
