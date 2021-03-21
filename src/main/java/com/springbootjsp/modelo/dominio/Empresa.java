@@ -1,4 +1,4 @@
-package br.com.springbootjsp.modelo.dominio;
+package com.springbootjsp.modelo.dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -52,7 +52,7 @@ public final class Empresa implements Serializable {
         this.funcionarios = funcionarios;
     }
 
-    public Map<UUID,Funcionario> getFuncionarios() {
+    public Map<UUID, Funcionario> getFuncionarios() {
         return this.funcionarios;
     }
 

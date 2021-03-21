@@ -1,4 +1,4 @@
-package br.com.springbootjsp.modelo.dominio;
+package com.springbootjsp.modelo.dominio;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
