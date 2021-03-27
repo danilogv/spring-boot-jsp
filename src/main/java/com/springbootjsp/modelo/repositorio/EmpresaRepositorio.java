@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Repository
@@ -38,7 +38,7 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
         "SELECT * " +
         "FROM empresa"
     ,nativeQuery = true)
-    List<Empresa> buscarTodos();
+    Map<UUID,Empresa> buscarTodos();
 
     @Query(value =
         "SELECT * " +

@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
-import java.util.List;
+import java.util.Date;
+import java.util.Map;
 import java.util.UUID;
 
 @Repository
@@ -41,7 +41,7 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario,UUID> 
         "SELECT * " +
         "FROM funcionario"
     ,nativeQuery = true)
-    List<Funcionario> buscarTodos();
+    Map<UUID,Funcionario> buscarTodos();
 
     @Query(value =
         "SELECT * " +

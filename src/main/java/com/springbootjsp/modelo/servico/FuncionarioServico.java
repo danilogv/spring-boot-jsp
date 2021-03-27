@@ -7,13 +7,24 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class FuncionarioServico {
 
     @Autowired
     private FuncionarioRepositorio repositorio;
+
+    public Map<UUID,Funcionario> listar() {
+        Map<UUID,Funcionario> funcionarios = this.repositorio.buscarTodos();
+        return funcionarios;
+    }
+
+    public Funcionario buscar(String id) {
+        Funcionario funcionario = this.repositorio.buscar(id);
+        return funcionario;
+    }
 
     public void salvar(Funcionario funcionario) {
         String id = funcionario.getId().toString();
@@ -32,18 +43,8 @@ public class FuncionarioServico {
         }
     }
 
-    public void remove(String id) {
+    public void excluir(String id) {
         this.repositorio.remove(id);
-    }
-
-    public List<Funcionario> buscarTodos() {
-        List<Funcionario> funcionarios = this.repositorio.buscarTodos();
-        return funcionarios;
-    }
-
-    public Funcionario buscar(String id) {
-        Funcionario funcionario = this.repositorio.buscar(id);
-        return funcionario;
     }
 
 }
