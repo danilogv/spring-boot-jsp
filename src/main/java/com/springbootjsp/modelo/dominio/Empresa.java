@@ -11,7 +11,6 @@ import java.util.UUID;
 public final class Empresa implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private UUID id;
 

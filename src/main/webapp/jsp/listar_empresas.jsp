@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="utf-8" %>
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
@@ -7,5 +7,9 @@
     </head>
     <body>
         <h1> Lista de Empresas </h1>
+        <br/> <br/>
+        <a href="/empresa/formulario">
+            <button> Cadastrar </button>
+        </a>
     </body>
 </html>

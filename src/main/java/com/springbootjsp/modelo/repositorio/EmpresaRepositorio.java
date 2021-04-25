@@ -14,10 +14,10 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
 
     @Modifying
     @Query(value =
-        "INSERT INTO empresa(nome,cnpj) " +
-        "VALUES (?1,?2)"
+        "INSERT INTO Empresa(id,nome,cnpj) " +
+        "VALUES (?1,?2,?3)"
     ,nativeQuery = true)
-    void insere(String nome,String cnpj);
+    void insere(String id,String nome,String cnpj);
 
     @Modifying
     @Query(value =
@@ -52,6 +52,6 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
         "FROM empresa " +
         "WHERE cnpj = ?1"
     ,nativeQuery = true)
-    Boolean existe(String cnpj);
+    Integer existe(String cnpj);
 
 }

@@ -4,6 +4,8 @@ import com.springbootjsp.modelo.dominio.Empresa;
 import com.springbootjsp.modelo.repositorio.EmpresaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.UUID;
@@ -24,15 +26,16 @@ public class EmpresaServico {
         return empresa;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public void salvar(Empresa empresa) {
-        String id = empresa.getId().toString();
         String nome = empresa.getNome();
         String cnpj = empresa.getCnpj();
-        Boolean existe = this.repositorio.existe(cnpj);
-        if(!existe) {
-            this.repositorio.insere(nome, cnpj);
+        if(this.repositorio.existe(cnpj) == 0) {
+            String id = UUID.randomUUID().toString();
+            this.repositorio.insere(id,nome,cnpj);
         }
         else {
+            String id = empresa.getId().toString();
             this.repositorio.altera(nome,cnpj,id);
         }
     }
