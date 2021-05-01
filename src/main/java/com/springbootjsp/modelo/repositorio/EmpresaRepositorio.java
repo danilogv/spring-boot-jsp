@@ -7,10 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Map;
-import java.util.UUID;
 
 @Repository
-public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
+public interface EmpresaRepositorio extends JpaRepository<Empresa,String> {
 
     @Modifying
     @Query(value =
@@ -38,7 +37,7 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa,UUID> {
         "SELECT * " +
         "FROM empresa"
     ,nativeQuery = true)
-    Map<UUID,Empresa> buscarTodos();
+    Map<String,Empresa> buscarTodos();
 
     @Query(value =
         "SELECT * " +

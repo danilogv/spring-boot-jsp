@@ -16,13 +16,13 @@ public class EmpresaServico {
     @Autowired
     private EmpresaRepositorio repositorio;
 
-    public Map<UUID,Empresa> listar() {
-        Map<UUID,Empresa> empresas = this.repositorio.buscarTodos();
+    public Map<String,Empresa> listar() {
+        Map<String,Empresa> empresas = this.repositorio.buscarTodos();
         return empresas;
     }
 
     public Empresa buscar(String id) {
-        Empresa empresa = repositorio.buscar(id);
+        Empresa empresa = this.repositorio.buscar(id);
         return empresa;
     }
 
@@ -35,7 +35,7 @@ public class EmpresaServico {
             this.repositorio.insere(id,nome,cnpj);
         }
         else {
-            String id = empresa.getId().toString();
+            String id = empresa.getId();
             this.repositorio.altera(nome,cnpj,id);
         }
     }

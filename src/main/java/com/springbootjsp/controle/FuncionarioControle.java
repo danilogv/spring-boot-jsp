@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
-import java.util.UUID;
 
 @Controller
 public class FuncionarioControle {
@@ -22,7 +21,7 @@ public class FuncionarioControle {
 
     @RequestMapping(value = "/funcionario", method = RequestMethod.GET)
     public ModelAndView listar(Model modelo) {
-        Map<UUID, Funcionario> funcionarios = this.servico.listar();
+        Map<String,Funcionario> funcionarios = this.servico.listar();
         modelo.addAttribute("funcionarios", funcionarios);
         ModelAndView visao = new ModelAndView("listar_funcionarios");
         return visao;

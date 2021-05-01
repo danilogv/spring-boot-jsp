@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class FuncionarioServico {
@@ -16,8 +15,8 @@ public class FuncionarioServico {
     @Autowired
     private FuncionarioRepositorio repositorio;
 
-    public Map<UUID,Funcionario> listar() {
-        Map<UUID,Funcionario> funcionarios = this.repositorio.buscarTodos();
+    public Map<String,Funcionario> listar() {
+        Map<String,Funcionario> funcionarios = this.repositorio.buscarTodos();
         return funcionarios;
     }
 
@@ -27,7 +26,7 @@ public class FuncionarioServico {
     }
 
     public void salvar(Funcionario funcionario) {
-        String id = funcionario.getId().toString();
+        String id = funcionario.getId();
         String nome = funcionario.getNome();
         String cpf = funcionario.getCpf();
         BigDecimal salario = funcionario.getSalario();

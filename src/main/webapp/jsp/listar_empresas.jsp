@@ -8,7 +8,7 @@
     <body>
         <h1> Lista de Empresas </h1>
         <br/> <br/>
-        <a href="/empresa/formulario">
+        <a href="/empresa">
             <button> Cadastrar </button>
         </a>
     </body>

@@ -3,16 +3,15 @@ package com.springbootjsp.modelo.dominio;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
+import java.util.Objects;
 
 @Entity
 @Table(name = "funcionario")
 public final class Funcionario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private UUID id;
+    private String id;
 
     @Column(name = "nome")
     private String nome;
@@ -33,11 +32,11 @@ public final class Funcionario {
     @JoinColumn(name = "empresa_id")
     private Empresa empresa;
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -87,6 +86,20 @@ public final class Funcionario {
 
     public Empresa getEmpresa() {
         return this.empresa;
+    }
+
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto)
+            return true;
+        if (objeto == null || getClass() != objeto.getClass())
+            return false;
+        Funcionario funcionario = (Funcionario) objeto;
+        if (this.cpf.equals(funcionario.getCpf()))
+            return true;
+        if (this.cpf.equals(funcionario.getCpf()) && this.empresa.getId().equals(funcionario.getEmpresa().getId()))
+            return true;
+        return false;
     }
 
 }

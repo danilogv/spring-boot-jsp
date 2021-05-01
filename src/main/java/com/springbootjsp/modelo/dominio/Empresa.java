@@ -2,9 +2,7 @@ package com.springbootjsp.modelo.dominio;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.List;
 
 @Entity
 @Table(name = "empresa")
@@ -12,7 +10,7 @@ public final class Empresa implements Serializable {
 
     @Id
     @Column(name = "id")
-    private UUID id;
+    private String id;
 
     @Column(name = "nome")
     private String nome;
@@ -21,13 +19,13 @@ public final class Empresa implements Serializable {
     private String cnpj;
 
     @OneToMany(mappedBy = "empresa", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Map<UUID,Funcionario> funcionarios = new HashMap<>();
+    private List<Funcionario> funcionarios;
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getId() {
+    public String getId() {
         return this.id;
     }
 
@@ -47,12 +45,24 @@ public final class Empresa implements Serializable {
         return this.cnpj;
     }
 
-    public void setFuncionarios(Map<UUID,Funcionario> funcionarios) {
+    public void setFuncionarios(List<Funcionario> funcionarios) {
         this.funcionarios = funcionarios;
     }
 
-    public Map<UUID, Funcionario> getFuncionarios() {
+    public List<Funcionario> getFuncionarios() {
         return this.funcionarios;
+    }
+
+    @Override
+    public boolean equals(Object objeto) {
+        if (this == objeto)
+            return true;
+        if (objeto == null || getClass() != objeto.getClass())
+            return false;
+        Empresa empresa = (Empresa) objeto;
+        if (this.cnpj.equals(empresa.getCnpj()))
+            return true;
+        return false;
     }
 
 }

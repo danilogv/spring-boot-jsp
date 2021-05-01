@@ -10,10 +10,9 @@ import java.math.BigDecimal;
 
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @Repository
-public interface FuncionarioRepositorio extends JpaRepository<Funcionario,UUID> {
+public interface FuncionarioRepositorio extends JpaRepository<Funcionario,String> {
 
     @Modifying
     @Query(value =
@@ -41,7 +40,7 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario,UUID> 
         "SELECT * " +
         "FROM funcionario"
     ,nativeQuery = true)
-    Map<UUID,Funcionario> buscarTodos();
+    Map<String,Funcionario> buscarTodos();
 
     @Query(value =
         "SELECT * " +
