@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,8 +16,8 @@ public class EmpresaServico {
     @Autowired
     private EmpresaRepositorio repositorio;
 
-    public Map<String,Empresa> listar() {
-        Map<String,Empresa> empresas = this.repositorio.buscarTodos();
+    public List<Empresa> listar() {
+        List<Empresa> empresas = this.repositorio.buscarTodos();
         return empresas;
     }
 

@@ -3,12 +3,13 @@ package com.springbootjsp.controle;
 import com.springbootjsp.modelo.dominio.Empresa;
 import com.springbootjsp.modelo.servico.EmpresaServico;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import java.util.List;
 
 @Controller
 public class EmpresaControle {
@@ -24,8 +25,14 @@ public class EmpresaControle {
 
     @RequestMapping(value = "/empresas", method = RequestMethod.GET)
     public ModelAndView listar(Model modelo) {
-        Map<String,Empresa> empresas = this.servico.listar();
+        List<Empresa> empresas = this.servico.listar();
+        PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
+        empresasPaginacao.setPageSize(3);//número de empresas na página
+        empresasPaginacao.setPage(0);//pagína a ser mostrada
+        int paginas = empresasPaginacao.getPageCount();
+        empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
+        modelo.addAttribute("paginas", paginas);
         ModelAndView visao = new ModelAndView("listar_empresas");
         return visao;
     }
