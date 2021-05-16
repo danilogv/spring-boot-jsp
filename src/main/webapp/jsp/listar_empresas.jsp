@@ -29,6 +29,18 @@
             </c:forEach>
         </table>
         <br/> <br/>
+        <table>
+            <tr>
+                <c:forEach begin="1" end="${qtd_maxima_paginas}" step="1" var="i">
+                    <c:if test="${i <= numero_paginas}">
+                        <td>
+                            <a href="/empresas?pagina=${i-1}"> ${i} </a>
+                        </td>
+                    </c:if>
+                </c:forEach>
+            </tr>
+        </table>
+        <br/> <br/>
         <a href="/empresa">
             <button> Cadastrar </button>
         </a>

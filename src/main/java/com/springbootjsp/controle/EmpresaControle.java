@@ -24,15 +24,18 @@ public class EmpresaControle {
     }
 
     @RequestMapping(value = "/empresas", method = RequestMethod.GET)
-    public ModelAndView listar(Model modelo) {
+    public ModelAndView listar(@RequestParam(defaultValue = "0") Integer pagina, Model modelo) {
         List<Empresa> empresas = this.servico.listar();
         PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
-        empresasPaginacao.setPageSize(3);//número de empresas na página
-        empresasPaginacao.setPage(0);//pagína a ser mostrada
-        int paginas = empresasPaginacao.getPageCount();
+        empresasPaginacao.setPageSize(2);
+        empresasPaginacao.setPage(pagina);
         empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
-        modelo.addAttribute("paginas", paginas);
+        modelo.addAttribute("numero_paginas",empresasPaginacao.getPageCount());
+        modelo.addAttribute("pagina_anterior",pagina - 1);
+        modelo.addAttribute("pagina_atual",pagina);
+        modelo.addAttribute("pagina_posterior",pagina + 1);
+        modelo.addAttribute("qtd_maxima_paginas", 6);
         ModelAndView visao = new ModelAndView("listar_empresas");
         return visao;
     }
