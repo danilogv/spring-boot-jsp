@@ -17,33 +17,49 @@ public class EmpresaControle {
     @Autowired
     private EmpresaServico servico;
 
-    @RequestMapping(value = "/empresa", method = RequestMethod.GET)
-    public ModelAndView formulario() {
-        ModelAndView visao = new ModelAndView("formulario_empresa");
-        return visao;
-    }
+    private final Integer QTD_PAGINA = 3;
+
+    private final Integer QTD_MAXIMA_PAGINAS = 3;
 
     @RequestMapping(value = "/empresas", method = RequestMethod.GET)
     public ModelAndView listar(@RequestParam(defaultValue = "0") Integer pagina, Model modelo) {
+        if (pagina < 0) {
+            pagina = 0;
+        }
         List<Empresa> empresas = this.servico.listar();
         PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
-        empresasPaginacao.setPageSize(2);
+        empresasPaginacao.setPageSize(this.QTD_PAGINA);
         empresasPaginacao.setPage(pagina);
         empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
         modelo.addAttribute("numero_paginas",empresasPaginacao.getPageCount());
         modelo.addAttribute("pagina_anterior",pagina - 1);
-        modelo.addAttribute("pagina_atual",pagina);
+        if (pagina > this.QTD_MAXIMA_PAGINAS) {
+            modelo.addAttribute("pagina_atual",this.QTD_MAXIMA_PAGINAS);
+        }
+        else {
+            modelo.addAttribute("pagina_atual",pagina);
+        }
         modelo.addAttribute("pagina_posterior",pagina + 1);
-        modelo.addAttribute("qtd_maxima_paginas", 6);
+        modelo.addAttribute("qtd_maxima_paginas",this.QTD_MAXIMA_PAGINAS);
         ModelAndView visao = new ModelAndView("listar_empresas");
         return visao;
     }
 
-    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.GET)
-    public ModelAndView buscar(@PathVariable String id, Model modelo) {
-        Empresa empresa = this.servico.buscar(id);
-        modelo.addAttribute("empresa",empresa);
+    @RequestMapping(value = {"/empresa","/empresa/{opcao}/{id}"}, method = RequestMethod.GET)
+    public ModelAndView buscar(@PathVariable(required = false) String opcao, @PathVariable(required = false) String id, Model modelo) {
+        if (id != null) {
+            Empresa empresa = this.servico.buscar(id);
+            modelo.addAttribute("empresa",empresa);
+            if (opcao.equals("editar")) {
+                ModelAndView visao = new ModelAndView("formulario_empresa");
+                return visao;
+            }
+            else {
+                ModelAndView visao = new ModelAndView("vizualizar_empresa");
+                return visao;
+            }
+        }
         ModelAndView visao = new ModelAndView("formulario_empresa");
         return visao;
     }
