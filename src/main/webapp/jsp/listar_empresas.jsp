@@ -5,6 +5,8 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresas </title>
+        <script src="../js/jquery.js"> </script>
+        <script src="../js/empresa.js"> </script>
     </head>
     <body>
         <table border="1">
@@ -17,7 +19,7 @@
                         <c:out value="${empresa.nome}" />
                     </td>
                     <td>
-                        <a href="/empresa/${"vizualizar"}/${empresa.id}">
+                        <a href="/empresa/${"visualizar"}/${empresa.id}">
                             <button> Visualizar </button>
                         </a>
                     </td>
@@ -27,8 +29,8 @@
                         </a>
                     </td>
                     <td>
-                        <form action="/empresa/${empresa.id}" method="post">
-                            <button type="submit"> Excluir </button>
+                        <form id="form_exclusao" action="/empresa/${empresa.id}" method="post">
+                            <button> Excluir </button>
                         </form>
                     </td>
                 </tr>

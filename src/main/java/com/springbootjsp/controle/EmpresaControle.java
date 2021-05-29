@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
@@ -48,33 +49,34 @@ public class EmpresaControle {
 
     @RequestMapping(value = {"/empresa","/empresa/{opcao}/{id}"}, method = RequestMethod.GET)
     public ModelAndView buscar(@PathVariable(required = false) String opcao, @PathVariable(required = false) String id, Model modelo) {
+        ModelAndView visao = new ModelAndView();
         if (id != null) {
             Empresa empresa = this.servico.buscar(id);
             modelo.addAttribute("empresa",empresa);
             if (opcao.equals("editar")) {
-                ModelAndView visao = new ModelAndView("formulario_empresa");
-                return visao;
+                visao.setViewName("formulario_empresa");
             }
             else {
-                ModelAndView visao = new ModelAndView("vizualizar_empresa");
-                return visao;
+                visao.setViewName("visualizar_empresa");
             }
         }
-        ModelAndView visao = new ModelAndView("formulario_empresa");
+        else {
+            visao.setViewName("formulario_empresa");
+        }
         return visao;
     }
 
     @RequestMapping(value = "/empresa", method = RequestMethod.POST)
-    public ModelAndView salvar(@ModelAttribute Empresa empresa) {
+    public RedirectView salvar(@ModelAttribute Empresa empresa) {
         this.servico.salvar(empresa);
-        ModelAndView visao = new ModelAndView("listar_empresas");
+        RedirectView visao = new RedirectView("/empresas");
         return visao;
     }
 
     @RequestMapping(value = "/empresa/{id}", method = RequestMethod.POST)
-    public ModelAndView excluir(@PathVariable String id) {
+    public RedirectView excluir(@PathVariable String id) {
         this.servico.excluir(id);
-        ModelAndView visao = new ModelAndView ("listar_empresas");
+        RedirectView visao = new RedirectView("/empresas");
         return visao;
     }
 

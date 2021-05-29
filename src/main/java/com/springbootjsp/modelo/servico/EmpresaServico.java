@@ -16,11 +16,13 @@ public class EmpresaServico {
     @Autowired
     private EmpresaRepositorio repositorio;
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     public List<Empresa> listar() {
         List<Empresa> empresas = this.repositorio.buscarTodos();
         return empresas;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
     public Empresa buscar(String id) {
         Empresa empresa = this.repositorio.buscar(id);
         return empresa;
@@ -40,6 +42,7 @@ public class EmpresaServico {
         }
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
     public void excluir(String id) {
         this.repositorio.remove(id);
     }
