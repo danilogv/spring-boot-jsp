@@ -8,7 +8,10 @@
         <script src="../js/jquery.js"> </script>
         <script src="../js/empresa.js"> </script>
     </head>
-    <body>
+    <body id="corpo">
+        <label> Pesquisar por nome : </label>
+        <input type="text" id="nome" name="nome" value="${nome}" autofocus="true" />
+        <br/> <br/>
         <table border="1">
             <tr>
                 <th colspan="4"> Empresas </th>

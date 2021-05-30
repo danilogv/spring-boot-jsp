@@ -17,8 +17,8 @@ public class EmpresaServico {
     private EmpresaRepositorio repositorio;
 
     @Transactional(isolation = Isolation.READ_COMMITTED, readOnly = true)
-    public List<Empresa> listar() {
-        List<Empresa> empresas = this.repositorio.buscarTodos();
+    public List<Empresa> listar(String nome) {
+        List<Empresa> empresas = this.repositorio.buscarTodos(nome);
         return empresas;
     }
 

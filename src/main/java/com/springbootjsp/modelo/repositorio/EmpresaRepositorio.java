@@ -36,9 +36,10 @@ public interface EmpresaRepositorio extends JpaRepository<Empresa,String> {
     @Query(value =
         "SELECT * " +
         "FROM empresa " +
+        "WHERE nome LIKE %?1% " +
         "ORDER BY nome"
     ,nativeQuery = true)
-    List<Empresa> buscarTodos();
+    List<Empresa> buscarTodos(String nome);
 
     @Query(value =
         "SELECT * " +

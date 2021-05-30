@@ -22,25 +22,25 @@ public class EmpresaControle {
 
     private final Integer QTD_MAXIMA_PAGINAS = 3;
 
-    @RequestMapping(value = "/empresas", method = RequestMethod.GET)
-    public ModelAndView listar(@RequestParam(defaultValue = "0") Integer pagina, Model modelo) {
-        if (pagina < 0) {
+    @RequestMapping(value = {"/empresas","/empresas/{nome}"}, method = RequestMethod.GET)
+    public ModelAndView listar(@PathVariable(required = false) String nome, @RequestParam(defaultValue = "0") Integer pagina, Model modelo) {
+        if (pagina < 0)
             pagina = 0;
-        }
-        List<Empresa> empresas = this.servico.listar();
+        if (nome == null)
+            nome = "";
+        List<Empresa> empresas = this.servico.listar(nome);
         PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
         empresasPaginacao.setPageSize(this.QTD_PAGINA);
         empresasPaginacao.setPage(pagina);
         empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
+        modelo.addAttribute("nome", nome);
         modelo.addAttribute("numero_paginas",empresasPaginacao.getPageCount());
         modelo.addAttribute("pagina_anterior",pagina - 1);
-        if (pagina > this.QTD_MAXIMA_PAGINAS) {
+        if (pagina > this.QTD_MAXIMA_PAGINAS)
             modelo.addAttribute("pagina_atual",this.QTD_MAXIMA_PAGINAS);
-        }
-        else {
+        else
             modelo.addAttribute("pagina_atual",pagina);
-        }
         modelo.addAttribute("pagina_posterior",pagina + 1);
         modelo.addAttribute("qtd_maxima_paginas",this.QTD_MAXIMA_PAGINAS);
         ModelAndView visao = new ModelAndView("listar_empresas");
@@ -53,16 +53,13 @@ public class EmpresaControle {
         if (id != null) {
             Empresa empresa = this.servico.buscar(id);
             modelo.addAttribute("empresa",empresa);
-            if (opcao.equals("editar")) {
+            if (opcao.equals("editar"))
                 visao.setViewName("formulario_empresa");
-            }
-            else {
+            else
                 visao.setViewName("visualizar_empresa");
-            }
         }
-        else {
+        else
             visao.setViewName("formulario_empresa");
-        }
         return visao;
     }
 

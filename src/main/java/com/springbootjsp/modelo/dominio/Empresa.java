@@ -60,7 +60,7 @@ public final class Empresa implements Serializable {
         if (objeto == null || getClass() != objeto.getClass())
             return false;
         Empresa empresa = (Empresa) objeto;
-        if (this.cnpj.equals(empresa.getCnpj()))
+        if (this.id.equals(empresa.getId()) || this.cnpj.equals(empresa.getCnpj()))
             return true;
         return false;
     }
