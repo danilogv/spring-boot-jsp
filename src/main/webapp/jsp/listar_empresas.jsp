@@ -9,6 +9,12 @@
         <script src="../js/empresa.js"> </script>
     </head>
     <body id="corpo">
+        <c:if test="${not empty mensagemSucesso}">
+            <div style="width: 100%;background-color: green;color: white;height: 5vh">
+                <label style="position:absolute;margin-top: 6px"> ${mensagemSucesso} </label>
+            </div>
+            <br/> <br/>
+        </c:if>
         <label> Pesquisar por nome : </label>
         <input type="text" id="nome" name="nome" value="${nome}" autofocus="true" />
         <br/> <br/>

@@ -9,8 +9,9 @@ $(document).ready(function(){
     $(document).on("keyup","#nome",function() {
         var nome = $("#nome").val();
         $.get("/empresas/" + nome, function(resposta) {
-            var temp = $.parseHTML(resposta);
-            $("#corpo").html(temp);
+            var pagina = $.parseHTML(resposta);
+            $("#corpo").html(pagina);
+            $("#nome").focus().val("").val(nome);
             event.preventDefault();
         });
     });

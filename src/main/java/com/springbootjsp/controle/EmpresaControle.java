@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class EmpresaControle {
     private final Integer QTD_MAXIMA_PAGINAS = 3;
 
     @RequestMapping(value = {"/empresas","/empresas/{nome}"}, method = RequestMethod.GET)
-    public ModelAndView listar(@PathVariable(required = false) String nome, @RequestParam(defaultValue = "0") Integer pagina, Model modelo) {
+    public ModelAndView listar(@PathVariable(required = false) String nome,@RequestParam(defaultValue = "0") Integer pagina,Model modelo) {
         if (pagina < 0)
             pagina = 0;
         if (nome == null)
@@ -48,7 +49,7 @@ public class EmpresaControle {
     }
 
     @RequestMapping(value = {"/empresa","/empresa/{opcao}/{id}"}, method = RequestMethod.GET)
-    public ModelAndView buscar(@PathVariable(required = false) String opcao, @PathVariable(required = false) String id, Model modelo) {
+    public ModelAndView buscar(@PathVariable(required = false) String opcao,@PathVariable(required = false) String id,Model modelo) {
         ModelAndView visao = new ModelAndView();
         if (id != null) {
             Empresa empresa = this.servico.buscar(id);
@@ -64,15 +65,23 @@ public class EmpresaControle {
     }
 
     @RequestMapping(value = "/empresa", method = RequestMethod.POST)
-    public RedirectView salvar(@ModelAttribute Empresa empresa) {
+    public RedirectView salvar(@ModelAttribute Empresa empresa,RedirectAttributes atributos) {
         this.servico.salvar(empresa);
+        String mensagem = null;
+        if (empresa.getId() == null || empresa.getId().isEmpty())
+            mensagem = "Inserção feita com sucesso.";
+        else
+            mensagem = "Edição feita com sucesso.";
+        atributos.addFlashAttribute("mensagemSucesso",mensagem);
         RedirectView visao = new RedirectView("/empresas");
         return visao;
     }
 
     @RequestMapping(value = "/empresa/{id}", method = RequestMethod.POST)
-    public RedirectView excluir(@PathVariable String id) {
+    public RedirectView excluir(@PathVariable String id,RedirectAttributes atributos) {
         this.servico.excluir(id);
+        String mensagem = "Exclusão feita com sucesso.";
+        atributos.addFlashAttribute("mensagemSucesso",mensagem);
         RedirectView visao = new RedirectView("/empresas");
         return visao;
     }

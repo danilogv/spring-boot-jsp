@@ -15,11 +15,10 @@
             <input type="text" name="cnpj" value="${empresa.cnpj}" />
             <br/>
             <input type="hidden" name="id" value="${empresa.id}" />
-            <br/> <br/>
-            <button type="submit"> Salvar </button>
-            <a href="/empresas">
-                <button> Cancelar </button>
-            </a>
+            <button type="submit" style="position: absolute;top: 100px"> Salvar </button>
         </form>
+        <a href="/empresas">
+            <button style="position: absolute;top: 100px;left: 70px"> Cancelar </button>
+        </a>
     </body>
 </html>
