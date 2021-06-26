@@ -5,13 +5,20 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresas </title>
+        <link rel="stylesheet" href="../css/empresa.css" />
         <script src="../js/jquery.js"> </script>
         <script src="../js/empresa.js"> </script>
     </head>
     <body id="corpo">
         <c:if test="${not empty mensagemSucesso}">
-            <div style="width: 100%;background-color: green;color: white;height: 5vh">
-                <label style="position:absolute;margin-top: 6px"> ${mensagemSucesso} </label>
+            <div class="painel_mensagem painel_mensagem_erro">
+                <label class="mensagem"> ${mensagemSucesso} </label>
+            </div>
+            <br/> <br/>
+        </c:if>
+        <c:if test="${not empty mensagemErro}">
+            <div class="painel_mensagem painel_mensagem_erro">
+                <label class="mensagem"> ${mensagemErro} </label>
             </div>
             <br/> <br/>
         </c:if>

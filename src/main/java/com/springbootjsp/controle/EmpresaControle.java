@@ -7,6 +7,7 @@ import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -23,7 +24,7 @@ public class EmpresaControle {
 
     private final Integer QTD_MAXIMA_PAGINAS = 3;
 
-    @RequestMapping(value = {"/empresas","/empresas/{nome}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/empresas","/empresas/{nome}"},method = RequestMethod.GET)
     public ModelAndView listar(@PathVariable(required = false) String nome,@RequestParam(defaultValue = "0") Integer pagina,Model modelo) {
         if (pagina < 0)
             pagina = 0;
@@ -35,7 +36,7 @@ public class EmpresaControle {
         empresasPaginacao.setPage(pagina);
         empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
-        modelo.addAttribute("nome", nome);
+        modelo.addAttribute("nome",nome);
         modelo.addAttribute("numero_paginas",empresasPaginacao.getPageCount());
         modelo.addAttribute("pagina_anterior",pagina - 1);
         if (pagina > this.QTD_MAXIMA_PAGINAS)
@@ -48,7 +49,7 @@ public class EmpresaControle {
         return visao;
     }
 
-    @RequestMapping(value = {"/empresa","/empresa/{opcao}/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/empresa","/empresa/{opcao}/{id}"},method = RequestMethod.GET)
     public ModelAndView buscar(@PathVariable(required = false) String opcao,@PathVariable(required = false) String id,Model modelo) {
         ModelAndView visao = new ModelAndView();
         if (id != null) {
@@ -64,24 +65,38 @@ public class EmpresaControle {
         return visao;
     }
 
-    @RequestMapping(value = "/empresa", method = RequestMethod.POST)
+    @RequestMapping(value = "/empresa",method = RequestMethod.POST)
     public RedirectView salvar(@ModelAttribute Empresa empresa,RedirectAttributes atributos) {
-        this.servico.salvar(empresa);
         String mensagem = null;
-        if (empresa.getId() == null || empresa.getId().isEmpty())
-            mensagem = "Inserção feita com sucesso.";
-        else
-            mensagem = "Edição feita com sucesso.";
-        atributos.addFlashAttribute("mensagemSucesso",mensagem);
+        try {
+            this.servico.salvar(empresa);
+
+            if (empresa.getId() == null || empresa.getId().isEmpty())
+                mensagem = "Inserção feita com sucesso.";
+            else
+                mensagem = "Edição feita com sucesso.";
+            atributos.addFlashAttribute("mensagemSucesso",mensagem);
+        }
+        catch (ResponseStatusException excecao) {
+            mensagem = excecao.getReason();
+            atributos.addFlashAttribute("mensagemErro",mensagem);
+        }
         RedirectView visao = new RedirectView("/empresas");
         return visao;
     }
 
-    @RequestMapping(value = "/empresa/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/empresa/{id}",method = RequestMethod.POST)
     public RedirectView excluir(@PathVariable String id,RedirectAttributes atributos) {
-        this.servico.excluir(id);
-        String mensagem = "Exclusão feita com sucesso.";
-        atributos.addFlashAttribute("mensagemSucesso",mensagem);
+        String mensagem = null;
+        try {
+            this.servico.excluir(id);
+            mensagem = "Exclusão feita com sucesso.";
+            atributos.addFlashAttribute("mensagemSucesso",mensagem);
+        }
+        catch (ResponseStatusException excecao) {
+            mensagem = excecao.getReason();
+            atributos.addFlashAttribute("mensagemErro",mensagem);
+        }
         RedirectView visao = new RedirectView("/empresas");
         return visao;
     }

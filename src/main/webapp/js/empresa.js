@@ -15,4 +15,7 @@ $(document).ready(function(){
             event.preventDefault();
         });
     });
+    $(document).on("keypress","#cnpj",function() {
+        $("#cnpj").mask("99.999.999/9999-99");
+    });
 });

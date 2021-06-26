@@ -5,6 +5,10 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresa </title>
+        <link rel="stylesheet" href="../css/empresa.css" />
+        <script src="../js/jquery.js"> </script>
+        <script src="../js/jquery.mask.js"> </script>
+        <script src="../js/empresa.js"> </script>
     </head>
     <body>
         <form method="post" action="/empresa">
@@ -12,13 +16,13 @@
             <input type="text" name="nome" value="${empresa.nome}" />
             <br/> <br/>
             <label> CNPJ : </label>
-            <input type="text" name="cnpj" value="${empresa.cnpj}" />
+            <input type="text" id="cnpj" name="cnpj" value="${empresa.cnpj}" />
             <br/>
             <input type="hidden" name="id" value="${empresa.id}" />
-            <button type="submit" style="position: absolute;top: 100px"> Salvar </button>
+            <button type="submit" class="botao"> Salvar </button>
         </form>
         <a href="/empresas">
-            <button style="position: absolute;top: 100px;left: 70px"> Cancelar </button>
+            <button class="botao botao_cancelar"> Cancelar </button>
         </a>
     </body>
 </html>

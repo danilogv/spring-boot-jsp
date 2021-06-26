@@ -1,0 +1,27 @@
+.botao {
+    position: absolute;
+    top: 100px;
+}
+
+.botao_cancelar {
+    left: 70px;
+}
+
+.painel_mensagem {
+    width: 100%;
+    color: white;
+    height: 5vh;
+}
+
+.painel_mensagem_sucesso {
+    background-color: green;
+}
+
+.painel_mensagem_erro {
+    background-color: red;
+}
+
+.mensagem {
+    position: absolute;
+    margin-top: 6px;
+}
