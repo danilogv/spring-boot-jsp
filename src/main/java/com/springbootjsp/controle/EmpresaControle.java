@@ -20,7 +20,7 @@ public class EmpresaControle {
     @Autowired
     private EmpresaServico servico;
 
-    private final Integer QTD_PAGINA = 3;
+    private final Integer QTD_POR_PAGINA = 3;
 
     private final Integer QTD_MAXIMA_PAGINAS = 3;
 
@@ -32,7 +32,7 @@ public class EmpresaControle {
             nome = "";
         List<Empresa> empresas = this.servico.listar(nome);
         PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
-        empresasPaginacao.setPageSize(this.QTD_PAGINA);
+        empresasPaginacao.setPageSize(this.QTD_POR_PAGINA);
         empresasPaginacao.setPage(pagina);
         empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
@@ -70,7 +70,6 @@ public class EmpresaControle {
         String mensagem = null;
         try {
             this.servico.salvar(empresa);
-
             if (empresa.getId() == null || empresa.getId().isEmpty())
                 mensagem = "Inserção feita com sucesso.";
             else

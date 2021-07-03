@@ -5,7 +5,8 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresas </title>
-        <link rel="stylesheet" href="../css/empresa.css" />
+        <link rel="stylesheet" type="text/css" href="../css/empresa.css" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
         <script src="../js/jquery.js"> </script>
         <script src="../js/empresa.js"> </script>
     </head>

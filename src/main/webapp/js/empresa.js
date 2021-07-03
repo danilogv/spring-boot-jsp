@@ -6,6 +6,19 @@ $(document).ready(function(){
         }
         return false;
     });
+    $(document).on("submit","#form_salvar",function() {
+        var nome = $("#nome").val();
+        var cnpj = $("#cnpj").val();
+        if (nome === "") {
+            alert("Informe o NOME.");
+            return false;
+        }
+        if (cnpj === "") {
+            alert("Informe o CNPJ.");
+            return false;
+        }
+        return true;
+    });
     $(document).on("keyup","#nome",function() {
         var nome = $("#nome").val();
         $.get("/empresas/" + nome, function(resposta) {

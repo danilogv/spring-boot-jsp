@@ -1,12 +1,3 @@
-.botao {
-    position: absolute;
-    top: 100px;
-}
-
-.botao_cancelar {
-    left: 70px;
-}
-
 .painel_mensagem {
     width: 100%;
     color: white;

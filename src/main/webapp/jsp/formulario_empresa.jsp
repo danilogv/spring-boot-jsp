@@ -6,23 +6,33 @@
         <meta charset="utf-8" />
         <title> Empresa </title>
         <link rel="stylesheet" href="../css/empresa.css" />
+        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
         <script src="../js/jquery.js"> </script>
         <script src="../js/jquery.mask.js"> </script>
         <script src="../js/empresa.js"> </script>
     </head>
     <body>
-        <form method="post" action="/empresa">
-            <label> Nome : </label>
-            <input type="text" name="nome" value="${empresa.nome}" />
-            <br/> <br/>
-            <label> CNPJ : </label>
-            <input type="text" id="cnpj" name="cnpj" value="${empresa.cnpj}" />
-            <br/>
+        <form id="form_salvar" method="post" action="/empresa">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        <label> Nome : </label>
+                        <input type="text" id="nome" name="nome" value="${empresa.nome}" class="form-control" />
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <label> CNPJ : </label>
+                        <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" value="${empresa.cnpj}" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <br />
             <input type="hidden" name="id" value="${empresa.id}" />
-            <button type="submit" class="botao"> Salvar </button>
+            <div class="ml-3">
+                <button type="submit" class="btn btn-primary"> Salvar </button>
+                <a href="/empresas">
+                    <button type="button" class="btn btn-primary"> Cancelar </button>
+                </a>
+            </div>
         </form>
-        <a href="/empresas">
-            <button class="botao botao_cancelar"> Cancelar </button>
-        </a>
     </body>
 </html>
