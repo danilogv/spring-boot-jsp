@@ -5,7 +5,6 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresa </title>
-        <link rel="stylesheet" href="../css/empresa.css" />
         <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
         <script src="../js/jquery.js"> </script>
         <script src="../js/jquery.mask.js"> </script>
