@@ -5,14 +5,14 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresa </title>
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-        <script src="../js/jquery.js"> </script>
-        <script src="../js/jquery.mask.js"> </script>
-        <script src="../js/empresa.js"> </script>
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
+        <script src="http://localhost:8080/js/jquery.js"> </script>
+        <script src="http://localhost:8080/js/jquery.mask.js"> </script>
+        <script src="http://localhost:8080/js/empresa.js"> </script>
     </head>
     <body>
         <form id="form_salvar" method="post" action="/empresa">
-            <div class="container-fluid">
+            <div class="container-fluid mt-2">
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <label> Nome : </label>

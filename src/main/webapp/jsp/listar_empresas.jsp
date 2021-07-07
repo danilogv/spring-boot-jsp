@@ -5,9 +5,9 @@
     <head>
         <meta charset="utf-8" />
         <title> Empresas </title>
-        <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
-        <script src="../js/jquery.js"> </script>
-        <script src="../js/empresa.js"> </script>
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
+        <script src="http://localhost:8080/js/jquery.js"> </script>
+        <script src="http://localhost:8080/js/empresa.js"> </script>
     </head>
     <body id="corpo">
         <div class="container-fluid mt-2">
@@ -73,17 +73,35 @@
                             <c:choose>
                                 <c:when test="${pagina_atual + 1 == numero_paginas}">
                                     <c:forEach begin="${numero_paginas - qtd_maxima_paginas + 1}" end="${numero_paginas}" step="1" var="i">
-                                        <li class="page-item">
-                                            <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
-                                        </li>
+                                        <c:choose>
+                                            <c:when test="${i - 1 == pagina_atual}">
+                                                <li class="page-item active">
+                                                    <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
+                                                </li>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <li class="page-item">
+                                                    <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
+                                                </li>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </c:forEach>
                                 </c:when>
                                 <c:otherwise>
                                     <c:forEach begin="${pagina_atual}" end="${qtd_maxima_paginas + pagina_atual - 1}" step="1" var="i">
                                         <c:if test="${i <= numero_paginas}">
-                                            <li class="page-item">
-                                                <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
-                                            </li>
+                                            <c:choose>
+                                                <c:when test="${i - 1 == pagina_atual}">
+                                                    <li class="page-item active">
+                                                        <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
+                                                    </li>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <li class="page-item">
+                                                        <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
+                                                    </li>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </c:if>
                                     </c:forEach>
                                 </c:otherwise>
@@ -92,9 +110,18 @@
                         <c:otherwise>
                             <c:forEach begin="1" end="${qtd_maxima_paginas}" step="1" var="i">
                                 <c:if test="${i <= numero_paginas}">
-                                    <li class="page-item">
-                                        <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
-                                    </li>
+                                    <c:choose>
+                                        <c:when test="${i - 1 == pagina_atual}">
+                                            <li class="page-item active">
+                                                <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
+                                            </li>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <li class="page-item">
+                                                <a href="/empresas?pagina=${i-1}" class="page-link"> ${i} </a>
+                                            </li>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </c:if>
                             </c:forEach>
                         </c:otherwise>

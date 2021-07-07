@@ -31,37 +31,32 @@ public class EmpresaServico {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
-    public void salvar(Empresa empresa) {
-        try {
-            String nome = empresa.getNome();
-            String cnpj = empresa.getCnpj();
-            if (this.repositorio.existe(cnpj) == 0) {
-                String id = UUID.randomUUID().toString();
-                this.repositorio.insere(id,nome,cnpj);
-            }
-            else {
-                String id = empresa.getId();
-                if (id == null || id.isEmpty()) {
-                    String msg = "Empresa com CNPJ já cadastrado.";
-                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
-                }
-                this.repositorio.altera(nome,cnpj,id);
-            }
+    public void inserir(Empresa empresa) {
+        String id = UUID.randomUUID().toString();
+        String nome = empresa.getNome();
+        String cnpj = empresa.getCnpj();
+        if (!this.repositorio.existe(cnpj).equals(0)) {
+            String msg = "Empresa com CNPJ já cadastrado.";
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }
-        catch (Exception excecao) {
-            String msg = "Erro de Servidor.";
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,msg,excecao);
+        this.repositorio.insere(id,nome,cnpj);
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED, rollbackFor = Exception.class)
+    public void alterar(Empresa empresa) {
+        String id = empresa.getId();
+        String nome = empresa.getNome();
+        String cnpj = empresa.getCnpj();
+        if (this.buscar(id).getCnpj().compareTo(cnpj) != 0 && !this.repositorio.existe(cnpj).equals(0)) {
+            String msg = "Empresa com CNPJ já cadastrado.";
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }
+        this.repositorio.altera(nome,cnpj,id);
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     public void excluir(String id) {
-        try {
-            this.repositorio.remove(id);
-        }
-        catch (Exception excecao) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR,"Erro de Servidor",excecao);
-        }
+        this.repositorio.remove(id);
     }
 
 }

@@ -55,8 +55,10 @@ public class EmpresaControle {
         if (id != null) {
             Empresa empresa = this.servico.buscar(id);
             modelo.addAttribute("empresa",empresa);
-            if (opcao.equals("editar"))
+            if (opcao.equals("editar")) {
                 visao.setViewName("formulario_empresa");
+                modelo.addAttribute("desabilitaCnpj",true);
+            }
             else
                 visao.setViewName("visualizar_empresa");
         }
@@ -69,15 +71,22 @@ public class EmpresaControle {
     public RedirectView salvar(@ModelAttribute Empresa empresa,RedirectAttributes atributos) {
         String mensagem = null;
         try {
-            this.servico.salvar(empresa);
-            if (empresa.getId() == null || empresa.getId().isEmpty())
+            if (empresa.getId() == null || empresa.getId().isEmpty()) {
+                this.servico.inserir(empresa);
                 mensagem = "Inserção feita com sucesso.";
-            else
+            }
+            else {
+                this.servico.alterar(empresa);
                 mensagem = "Edição feita com sucesso.";
+            }
             atributos.addFlashAttribute("mensagemSucesso",mensagem);
         }
         catch (ResponseStatusException excecao) {
             mensagem = excecao.getReason();
+            atributos.addFlashAttribute("mensagemErro",mensagem);
+        }
+        catch (Exception excecao) {
+            mensagem = "Erro de servidor.";
             atributos.addFlashAttribute("mensagemErro",mensagem);
         }
         RedirectView visao = new RedirectView("/empresas");
@@ -94,6 +103,10 @@ public class EmpresaControle {
         }
         catch (ResponseStatusException excecao) {
             mensagem = excecao.getReason();
+            atributos.addFlashAttribute("mensagemErro",mensagem);
+        }
+        catch (Exception excecao) {
+            mensagem = "Erro de servidor.";
             atributos.addFlashAttribute("mensagemErro",mensagem);
         }
         RedirectView visao = new RedirectView("/empresas");
