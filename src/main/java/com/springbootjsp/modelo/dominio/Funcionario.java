@@ -3,7 +3,6 @@ package com.springbootjsp.modelo.dominio;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "funcionario")

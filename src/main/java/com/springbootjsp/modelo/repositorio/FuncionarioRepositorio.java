@@ -9,17 +9,17 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 @Repository
 public interface FuncionarioRepositorio extends JpaRepository<Funcionario,String> {
 
     @Modifying
     @Query(value =
-        "INSERT INTO funcionario(nome,cpf,salario,idade,data_admissao,empresa_id) " +
-        "VALUES (?1,?2,?3,?4,?5,?6)"
+        "INSERT INTO funcionario(id,nome,cpf,salario,idade,data_admissao,empresa_id) " +
+        "VALUES (?1,?2,?3,?4,?5,?6,?7)"
     ,nativeQuery = true)
-    void insere(String nome,String cpf,BigDecimal salario,Integer idade,Date dataAdmissao,String empresaId);
+    void insere(String id,String nome,String cpf,BigDecimal salario,Integer idade,Date dataAdmissao,String empresaId);
 
     @Modifying
     @Query(value =
@@ -38,9 +38,11 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario,String
 
     @Query(value =
         "SELECT * " +
-        "FROM funcionario"
+        "FROM funcionario " +
+        "WHERE nome LIKE %?1% " +
+        "ORDER BY nome"
     ,nativeQuery = true)
-    Map<String,Funcionario> buscarTodos();
+    List<Funcionario> buscarTodos(String nome);
 
     @Query(value =
         "SELECT * " +
@@ -53,8 +55,8 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario,String
         "SELECT COUNT(id) > 0 " +
         "FROM funcionario " +
         "WHERE cpf = ?1 " +
-        "OR (cpf = ?1 AND empresa_id = ?2)"
+        "AND empresa_id = ?2"
     ,nativeQuery = true)
-    Boolean existe(String cpf,String empresaId);
+    Integer existe(String cpf,String empresaId);
 
 }

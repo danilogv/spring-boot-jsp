@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.Map;
+import java.util.List;
 
 @Controller
 public class FuncionarioControle {
@@ -21,7 +21,7 @@ public class FuncionarioControle {
 
     @RequestMapping(value = "/funcionario", method = RequestMethod.GET)
     public ModelAndView listar(Model modelo) {
-        Map<String,Funcionario> funcionarios = this.servico.listar();
+        List<Funcionario> funcionarios = this.servico.listar("aslkfl");
         modelo.addAttribute("funcionarios", funcionarios);
         ModelAndView visao = new ModelAndView("listar_funcionarios");
         return visao;
@@ -37,14 +37,7 @@ public class FuncionarioControle {
 
     @RequestMapping(value = "/funcionario", method = RequestMethod.POST)
     public ModelAndView salvar(@RequestBody Funcionario funcionario) {
-        this.servico.salvar(funcionario);
-        ModelAndView visao = new ModelAndView ("formulario_funcionario");
-        return visao;
-    }
-
-    @RequestMapping(value = "/funcionario", method = RequestMethod.PUT)
-    public ModelAndView editar(@RequestBody Funcionario funcionario) {
-        this.servico.salvar(funcionario);
+        this.servico.inserir(funcionario);
         ModelAndView visao = new ModelAndView ("formulario_funcionario");
         return visao;
     }
