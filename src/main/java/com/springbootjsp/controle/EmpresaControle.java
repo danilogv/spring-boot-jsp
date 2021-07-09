@@ -55,10 +55,8 @@ public class EmpresaControle {
         if (id != null) {
             Empresa empresa = this.servico.buscar(id);
             modelo.addAttribute("empresa",empresa);
-            if (opcao.equals("editar")) {
+            if (opcao.equals("editar"))
                 visao.setViewName("formulario_empresa");
-                modelo.addAttribute("desabilitaCnpj",true);
-            }
             else
                 visao.setViewName("visualizar_empresa");
         }
