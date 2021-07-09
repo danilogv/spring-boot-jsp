@@ -2,7 +2,7 @@ package com.springbootjsp.modelo.dominio;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "funcionario")
@@ -24,8 +24,8 @@ public final class Funcionario {
     @Column(name = "idade")
     private Integer idade;
 
-    @Column(name = "data_admissao")
-    private Date dataAdmissao;
+    @Column(name = "data_desligamento")
+    private LocalDate dataDesligamento;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "empresa_id")
@@ -71,12 +71,12 @@ public final class Funcionario {
         return this.idade;
     }
 
-    public void setDataAdmissao(Date dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
+    public void setDataDesligamento(LocalDate dataDesligamento) {
+        this.dataDesligamento = dataDesligamento;
     }
 
-    public Date getDataAdmissao() {
-        return this.dataAdmissao;
+    public LocalDate getDataDesligamento() {
+        return this.dataDesligamento;
     }
 
     public void setEmpresa(Empresa empresa) {
@@ -94,8 +94,6 @@ public final class Funcionario {
         if (objeto == null || getClass() != objeto.getClass())
             return false;
         Funcionario funcionario = (Funcionario) objeto;
-        if (this.cpf.equals(funcionario.getCpf()))
-            return true;
         if (this.cpf.equals(funcionario.getCpf()) && this.empresa.getId().equals(funcionario.getEmpresa().getId()))
             return true;
         return false;

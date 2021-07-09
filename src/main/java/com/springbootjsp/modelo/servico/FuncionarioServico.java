@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -39,13 +40,13 @@ public class FuncionarioServico {
         String cpf = funcionario.getCpf();
         BigDecimal salario = funcionario.getSalario();
         Integer idade = funcionario.getIdade();
-        Date dataAdmissao = funcionario.getDataAdmissao();
+        LocalDate dataDesligamento = funcionario.getDataDesligamento();
         String empresaId = funcionario.getEmpresa().getId();
         if (this.repositorio.existe(cpf,empresaId).equals(1)) {
             String msg = "Funcionário já cadastrado na empresa.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }
-        this.repositorio.insere(id,nome,cpf,salario,idade,dataAdmissao,empresaId);
+        this.repositorio.insere(id,nome,cpf,salario,idade,dataDesligamento,empresaId);
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
@@ -55,13 +56,13 @@ public class FuncionarioServico {
         String cpf = funcionario.getCpf();
         BigDecimal salario = funcionario.getSalario();
         Integer idade = funcionario.getIdade();
-        Date dataAdmissao = funcionario.getDataAdmissao();
+        LocalDate dataDesligamento = funcionario.getDataDesligamento();
         String empresaId = funcionario.getEmpresa().getId();
         if (!this.buscar(id).getCpf().equals(cpf) && this.repositorio.existe(cpf,empresaId).equals(1)) {
             String msg = "Funcionário já cadastrado na empresa.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }
-        this.repositorio.altera(nome,cpf,salario,idade,dataAdmissao,empresaId,id);
+        this.repositorio.altera(nome,cpf,salario,idade,dataDesligamento,empresaId,id);
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)

@@ -20,9 +20,9 @@ public class EmpresaControle {
     @Autowired
     private EmpresaServico servico;
 
-    private final Integer QTD_POR_PAGINA = 3;
+    private final Integer QTD_POR_PAGINA = 10;
 
-    private final Integer QTD_MAXIMA_PAGINAS = 3;
+    private final Integer QTD_MAXIMA_PAGINAS = 5;
 
     @RequestMapping(value = {"/empresas","/empresas/{nome}"},method = RequestMethod.GET)
     public ModelAndView listar(@PathVariable(required = false) String nome,@RequestParam(defaultValue = "0") Integer pagina,Model modelo) {

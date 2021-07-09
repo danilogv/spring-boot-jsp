@@ -17,13 +17,14 @@
             <column name="idade" type="int">
                 <constraints nullable="false" />
             </column>
-            <column name="data_admissao" type="date">
-                <constraints nullable="false" />
+            <column name="data_desligamento" type="date">
+                <constraints nullable="true" />
             </column>
             <column name="empresa_id" type="char(36)">
-                <constraints nullable="false" foreignKeyName="fk_empresa" referencedTableName="empresa" referencedColumnNames="id" />
+                <constraints nullable="false" />
             </column>
         </createTable>
+        <addForeignKeyConstraint baseTableName="funcionario" baseColumnNames="empresa_id" constraintName="fk_empresa" referencedTableName="empresa" referencedColumnNames="id" onDelete="CASCADE" />
         <addUniqueConstraint tableName="funcionario" columnNames="cpf,empresa_id" constraintName="uq_cpf_empresa" />
     </changeSet>
 </databaseChangeLog>
