@@ -18,7 +18,7 @@ import java.util.List;
 public class EmpresaControle {
 
     @Autowired
-    private EmpresaServico servico;
+    private EmpresaServico empresaServico;
 
     private final Integer QTD_POR_PAGINA = 10;
 
@@ -30,7 +30,7 @@ public class EmpresaControle {
             pagina = 0;
         if (nome == null)
             nome = "";
-        List<Empresa> empresas = this.servico.listar(nome);
+        List<Empresa> empresas = this.empresaServico.listar(nome);
         PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
         empresasPaginacao.setPageSize(this.QTD_POR_PAGINA);
         empresasPaginacao.setPage(pagina);
@@ -53,7 +53,7 @@ public class EmpresaControle {
     public ModelAndView buscar(@PathVariable(required = false) String opcao,@PathVariable(required = false) String id,Model modelo) {
         ModelAndView visao = new ModelAndView();
         if (id != null) {
-            Empresa empresa = this.servico.buscar(id);
+            Empresa empresa = this.empresaServico.buscar(id);
             modelo.addAttribute("empresa",empresa);
             if (opcao.equals("editar"))
                 visao.setViewName("formulario_empresa");
@@ -70,11 +70,11 @@ public class EmpresaControle {
         String mensagem = null;
         try {
             if (empresa.getId() == null || empresa.getId().isEmpty()) {
-                this.servico.inserir(empresa);
+                this.empresaServico.inserir(empresa);
                 mensagem = "Inserção feita com sucesso.";
             }
             else {
-                this.servico.alterar(empresa);
+                this.empresaServico.alterar(empresa);
                 mensagem = "Edição feita com sucesso.";
             }
             atributos.addFlashAttribute("mensagemSucesso",mensagem);
@@ -95,7 +95,7 @@ public class EmpresaControle {
     public RedirectView excluir(@PathVariable String id,RedirectAttributes atributos) {
         String mensagem = null;
         try {
-            this.servico.excluir(id);
+            this.empresaServico.excluir(id);
             mensagem = "Exclusão feita com sucesso.";
             atributos.addFlashAttribute("mensagemSucesso",mensagem);
         }

@@ -1,6 +1,8 @@
 package com.springbootjsp.controle;
 
+import com.springbootjsp.modelo.dominio.Empresa;
 import com.springbootjsp.modelo.dominio.Funcionario;
+import com.springbootjsp.modelo.servico.EmpresaServico;
 import com.springbootjsp.modelo.servico.FuncionarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -18,7 +20,10 @@ import java.util.List;
 public class FuncionarioControle {
 
     @Autowired
-    private FuncionarioServico servico;
+    private FuncionarioServico funcionarioServico;
+
+    @Autowired
+    private EmpresaServico empresaServico;
 
     private final Integer QTD_POR_PAGINA = 3;
 
@@ -30,7 +35,7 @@ public class FuncionarioControle {
             pagina = 0;
         if (nome == null)
             nome = "";
-        List<Funcionario> funcionarios = this.servico.listar(nome);
+        List<Funcionario> funcionarios = this.funcionarioServico.listar(nome);
         PagedListHolder<Funcionario> funcionariosPaginacao = new PagedListHolder<>(funcionarios);
         funcionariosPaginacao.setPageSize(this.QTD_POR_PAGINA);
         funcionariosPaginacao.setPage(pagina);
@@ -49,19 +54,22 @@ public class FuncionarioControle {
         return visao;
     }
 
-    @RequestMapping(value = {"/funcionario/{id}","/funcionario/{opcao}/{id}"},method = RequestMethod.GET)
+    @RequestMapping(value = {"/funcionario","/funcionario/{opcao}/{id}"},method = RequestMethod.GET)
     public ModelAndView buscar(@PathVariable(required = false) String opcao,@PathVariable(required = false) String id,Model modelo) {
         ModelAndView visao = new ModelAndView();
         if (id != null) {
-            Funcionario funcionario = this.servico.buscar(id);
+            Funcionario funcionario = this.funcionarioServico.buscar(id);
             modelo.addAttribute("funcionario",funcionario);
             if (opcao.equals("editar"))
                 visao.setViewName("formulario_funcionario");
             else
                 visao.setViewName("visualizar_empresa");
         }
-        else
+        else {
+            List<Empresa> empresas = this.empresaServico.listar("");
             visao.setViewName("formulario_funcionario");
+            modelo.addAttribute("empresas",empresas);
+        }
         return visao;
     }
 
@@ -70,11 +78,11 @@ public class FuncionarioControle {
         String mensagem = null;
         try {
             if (funcionario.getId() == null || funcionario.getId().isEmpty()) {
-                this.servico.inserir(funcionario);
+                this.funcionarioServico.inserir(funcionario);
                 mensagem = "Inserção feita com sucesso.";
             }
             else {
-                this.servico.alterar(funcionario);
+                this.funcionarioServico.alterar(funcionario);
                 mensagem = "Edição feita com sucesso.";
             }
             atributos.addFlashAttribute("mensagemSucesso",mensagem);
@@ -91,11 +99,11 @@ public class FuncionarioControle {
         return visao;
     }
 
-    @RequestMapping(value = "/empresa/{id}",method = RequestMethod.POST)
+    @RequestMapping(value = "/funcionario/{id}",method = RequestMethod.POST)
     public RedirectView excluir(@PathVariable String id,RedirectAttributes atributos) {
         String mensagem = null;
         try {
-            this.servico.excluir(id);
+            this.funcionarioServico.excluir(id);
             mensagem = "Exclusão feita com sucesso.";
             atributos.addFlashAttribute("mensagemSucesso",mensagem);
         }

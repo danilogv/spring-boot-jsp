@@ -33,7 +33,7 @@ function cnpjValido(cnpj) {
             pos = 9;
     }
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-    if (resultado !== digitos.charAt(0))
+    if (resultado !== parseInt(digitos.charAt(0)))
         return false;
     tamanho = tamanho + 1;
     numeros = cnpj.substring(0, tamanho);
@@ -45,7 +45,7 @@ function cnpjValido(cnpj) {
             pos = 9;
     }
     resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-    if (resultado !== digitos.charAt(1))
+    if (resultado !== parseInt(digitos.charAt(1)))
         return false;
     return true;
 }
