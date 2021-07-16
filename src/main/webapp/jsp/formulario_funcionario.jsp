@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-4">
                         <label> Salário : </label>
-                        <input type="number" id="salario" name="salario" value="${funcionario.salario}" step="0.01" class="form-control" />
+                        <input type="text" id="salario" name="salario" value="${funcionario.salario}" class="form-control" />
                     </div>
                     <div class="col-12 col-sm-2">
                         <label> Idade : </label>
@@ -35,14 +35,14 @@
                     </div>
                     <div class="col-12 col-sm-4">
                         <label> Data de desligamento : </label>
-                        <input type="date" id="data_desligamento" name="data_desligamento" value="${funcionario.dataDesligamento}" class="form-control" />
+                        <input type="date" id="data_desligamento" name="data_desligamento" max="${data_minima}" value="${funcionario.dataDesligamento}" class="form-control" />
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <label> Empresa : </label>
-                        <select class="form-control">
+                        <select id="empresa" class="form-control">
                             <option selected> </option>
                             <c:forEach items="${empresas}" var="empresa">
                                 <option value="${empresa.id}"> ${empresa.nome} </option>
@@ -50,6 +50,12 @@
                         </select>
                     </div>
                 </div>
+                <br/>
+                <input type="hidden" name="id" value="${funcionario.id}" />
+                <button type="submit" class="btn btn-primary"> Salvar </button>
+                <a href="/funcionarios">
+                    <button type="button" class="btn btn-primary"> Cancelar </button>
+                </a>
             </div>
         </form>
     </body>

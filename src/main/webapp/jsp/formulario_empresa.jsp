@@ -23,10 +23,8 @@
                         <input type="text" id="cnpj" name="cnpj" placeholder="00.000.000/0000-00" value="${empresa.cnpj}" class="form-control" />
                     </div>
                 </div>
-            </div>
-            <br />
-            <input type="hidden" name="id" value="${empresa.id}" />
-            <div class="ml-3">
+                <br />
+                <input type="hidden" name="id" value="${empresa.id}" />
                 <button type="submit" class="btn btn-primary"> Salvar </button>
                 <a href="/empresas">
                     <button type="button" class="btn btn-primary"> Cancelar </button>

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -69,6 +71,7 @@ public class FuncionarioControle {
             List<Empresa> empresas = this.empresaServico.listar("");
             visao.setViewName("formulario_funcionario");
             modelo.addAttribute("empresas",empresas);
+            modelo.addAttribute("data_minima",LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         }
         return visao;
     }
