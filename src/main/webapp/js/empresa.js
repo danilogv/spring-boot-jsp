@@ -22,7 +22,7 @@ function cnpjValido(cnpj) {
         return false;
     if (cnpj === "99999999999999")
         return false;
-    tamanho = cnpj.length - 2
+    tamanho = cnpj.length - 2;
     numeros = cnpj.substring(0, tamanho);
     digitos = cnpj.substring(tamanho);
     soma = 0;

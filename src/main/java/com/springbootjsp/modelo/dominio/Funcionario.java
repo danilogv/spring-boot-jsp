@@ -1,5 +1,7 @@
 package com.springbootjsp.modelo.dominio;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,6 +27,7 @@ public final class Funcionario {
     private Integer idade;
 
     @Column(name = "data_desligamento")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate dataDesligamento;
 
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

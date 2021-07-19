@@ -16,18 +16,18 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario,String
 
     @Modifying
     @Query(value =
-        "INSERT INTO funcionario(id,nome,cpf,salario,idade,data_admissao,empresa_id) " +
+        "INSERT INTO funcionario(id,nome,cpf,salario,idade,data_desligamento,empresa_id) " +
         "VALUES (?1,?2,?3,?4,?5,?6,?7)"
     ,nativeQuery = true)
-    void insere(String id,String nome,String cpf,BigDecimal salario,Integer idade,LocalDate dataAdmissao,String empresaId);
+    void insere(String id,String nome,String cpf,BigDecimal salario,Integer idade,LocalDate dataDesligamento,String empresaId);
 
     @Modifying
     @Query(value =
         "UPDATE funcionario " +
-        "SET nome = ?1,cpf = ?2,salario = ?3,idade = ?4,data_admissao = ?5,empresa_id = ?6 " +
+        "SET nome = ?1,cpf = ?2,salario = ?3,idade = ?4,data_desligamento = ?5,empresa_id = ?6 " +
         "WHERE id = ?7"
     ,nativeQuery = true)
-    void altera(String nome,String cpf,BigDecimal salario,Integer idade,LocalDate dataAdmissao,String empresaId,String id);
+    void altera(String nome,String cpf,BigDecimal salario,Integer idade,LocalDate dataDesligamento,String empresaId,String id);
 
     @Modifying
     @Query(value =

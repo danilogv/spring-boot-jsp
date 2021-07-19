@@ -30,7 +30,6 @@ function cpfValido(cpf) {
         rev = 0;
     if (rev !== parseInt(cpf.charAt(9)))
         return false;
-    // Valida 2o digito
     soma = 0;
     for (var i = 0;i < 10;i++)
         soma += parseInt(cpf.charAt(i)) * (11 - i);
@@ -70,7 +69,7 @@ $(document).ready(function(){
             return false;
         }
         if (!cpfValido(cpf)) {
-            alert("CNPJ inválido.");
+            alert("CPF inválido.");
             return false;
         }
         salario = salario.replace(".","").trim();

@@ -33,14 +33,13 @@ public class FuncionarioServico {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
-    public void inserir(Funcionario funcionario) {
+    public void inserir(Funcionario funcionario,String empresaId) {
         String id = UUID.randomUUID().toString();
         String nome = funcionario.getNome();
         String cpf = funcionario.getCpf();
         BigDecimal salario = funcionario.getSalario();
         Integer idade = funcionario.getIdade();
         LocalDate dataDesligamento = funcionario.getDataDesligamento();
-        String empresaId = funcionario.getEmpresa().getId();
         if (this.repositorio.existe(cpf,empresaId).equals(1)) {
             String msg = "Funcionário já cadastrado na empresa.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);

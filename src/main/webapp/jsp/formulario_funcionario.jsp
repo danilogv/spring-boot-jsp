@@ -35,14 +35,14 @@
                     </div>
                     <div class="col-12 col-sm-4">
                         <label> Data de desligamento : </label>
-                        <input type="date" id="data_desligamento" name="data_desligamento" max="${data_minima}" value="${funcionario.dataDesligamento}" class="form-control" />
+                        <input type="date" id="data_desligamento" name="dataDesligamento" max="${data_minima}" value="${funcionario.dataDesligamento}" class="form-control" />
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <label> Empresa : </label>
-                        <select id="empresa" class="form-control">
+                        <select id="empresa" name="empresa" class="form-control">
                             <option selected> </option>
                             <c:forEach items="${empresas}" var="empresa">
                                 <option value="${empresa.id}"> ${empresa.nome} </option>

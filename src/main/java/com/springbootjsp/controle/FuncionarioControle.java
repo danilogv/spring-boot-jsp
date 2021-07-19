@@ -77,11 +77,11 @@ public class FuncionarioControle {
     }
 
     @RequestMapping(value = "/funcionario", method = RequestMethod.POST)
-    public RedirectView salvar(@ModelAttribute Funcionario funcionario,RedirectAttributes atributos) {
+    public RedirectView salvar(@ModelAttribute Funcionario funcionario,@RequestParam("empresa") String empresaId,RedirectAttributes atributos) {
         String mensagem = null;
         try {
             if (funcionario.getId() == null || funcionario.getId().isEmpty()) {
-                this.funcionarioServico.inserir(funcionario);
+                this.funcionarioServico.inserir(funcionario,empresaId);
                 mensagem = "Inserção feita com sucesso.";
             }
             else {
