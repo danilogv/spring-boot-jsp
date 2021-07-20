@@ -78,7 +78,7 @@ $(document).ready(function(){
         return true;
     });
     $(document).on("keypress","#salario",function() {
-        $("#salario").mask("#.##0,00");
+        $("#salario").mask("#.##0,00",{reverse: true});
     });
     $(document).on("keypress","#cpf",function(event) {
         if (event.which !== 8 && event.which !== 0 && (event.which < 48 || event.which > 57))

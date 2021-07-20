@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -59,29 +60,33 @@ public class FuncionarioControle {
     @RequestMapping(value = {"/funcionario","/funcionario/{opcao}/{id}"},method = RequestMethod.GET)
     public ModelAndView buscar(@PathVariable(required = false) String opcao,@PathVariable(required = false) String id,Model modelo) {
         ModelAndView visao = new ModelAndView();
+        List<Empresa> empresas = this.empresaServico.listar("");
+        modelo.addAttribute("empresas",empresas);
+        modelo.addAttribute("data_maxima",LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
         if (id != null) {
             Funcionario funcionario = this.funcionarioServico.buscar(id);
             modelo.addAttribute("funcionario",funcionario);
+            DecimalFormat formatoMoeda = new DecimalFormat("#,###.00");
+            modelo.addAttribute("salario", formatoMoeda.format(funcionario.getSalario()));
             if (opcao.equals("editar"))
                 visao.setViewName("formulario_funcionario");
             else
                 visao.setViewName("visualizar_empresa");
         }
-        else {
-            List<Empresa> empresas = this.empresaServico.listar("");
+        else
             visao.setViewName("formulario_funcionario");
-            modelo.addAttribute("empresas",empresas);
-            modelo.addAttribute("data_minima",LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        }
         return visao;
     }
 
     @RequestMapping(value = "/funcionario", method = RequestMethod.POST)
     public RedirectView salvar(@ModelAttribute Funcionario funcionario,@RequestParam("empresa") String empresaId,RedirectAttributes atributos) {
         String mensagem = null;
+        Empresa empresa = new Empresa();
+        empresa.setId(empresaId);
+        funcionario.setEmpresa(empresa);
         try {
             if (funcionario.getId() == null || funcionario.getId().isEmpty()) {
-                this.funcionarioServico.inserir(funcionario,empresaId);
+                this.funcionarioServico.inserir(funcionario);
                 mensagem = "Inserção feita com sucesso.";
             }
             else {

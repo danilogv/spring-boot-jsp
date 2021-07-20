@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-4">
                         <label> Salário : </label>
-                        <input type="text" id="salario" name="salario" value="${funcionario.salario}" class="form-control" />
+                        <input type="text" id="salario" name="salario" value="${salario}" class="form-control" />
                     </div>
                     <div class="col-12 col-sm-2">
                         <label> Idade : </label>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-12 col-sm-4">
                         <label> Data de desligamento : </label>
-                        <input type="date" id="data_desligamento" name="dataDesligamento" max="${data_minima}" value="${funcionario.dataDesligamento}" class="form-control" />
+                        <input type="date" id="data_desligamento" name="dataDesligamento" max="${data_maxima}" value="${funcionario.dataDesligamento}" class="form-control" />
                     </div>
                 </div>
                 <br/>
@@ -43,9 +43,19 @@
                     <div class="col-12 col-sm-6">
                         <label> Empresa : </label>
                         <select id="empresa" name="empresa" class="form-control">
-                            <option selected> </option>
+                            <c:if test="${empty funcionario}">
+                                <option value=""> Selecione ... </option>
+                            </c:if>
                             <c:forEach items="${empresas}" var="empresa">
-                                <option value="${empresa.id}"> ${empresa.nome} </option>
+                                <c:choose>
+                                    <c:when test="${not empty funcionario && funcionario.empresa.id == empresa.id}">
+                                        <option value="${empresa.id}" selected> ${empresa.nome} </option>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <option value="${empresa.id}"> ${empresa.nome} </option>
+                                    </c:otherwise>
+                                </c:choose>
+
                             </c:forEach>
                         </select>
                     </div>
