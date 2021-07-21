@@ -70,8 +70,13 @@ public class FuncionarioControle {
             modelo.addAttribute("salario", formatoMoeda.format(funcionario.getSalario()));
             if (opcao.equals("editar"))
                 visao.setViewName("formulario_funcionario");
-            else
-                visao.setViewName("visualizar_empresa");
+            else {
+                if (funcionario.getDataDesligamento() != null) {
+                    DateTimeFormatter formatoData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    modelo.addAttribute("dataDesligamento",funcionario.getDataDesligamento().format(formatoData));
+                }
+                visao.setViewName("visualizar_funcionario");
+            }
         }
         else
             visao.setViewName("formulario_funcionario");
