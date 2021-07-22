@@ -23,7 +23,7 @@
                 <label> Pesquisar por nome : </label>
                 <div class="row">
                     <div class="col-5 col-sm-5">
-                        <input type="text" id="nome" name="nome" value="${nome}" autofocus="true" class="form-control" />
+                        <input type="text" id="nome" name="nome" value="${nome}" class="form-control" autofocus />
                     </div>
                 </div>
                 <br/> <br/>

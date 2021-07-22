@@ -15,36 +15,23 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @Controller
-public class EmpresaControle {
+public class EmpresaControle extends ObjetoControle {
 
     @Autowired
     private EmpresaServico empresaServico;
 
-    private final Integer QTD_POR_PAGINA = 10;
-
-    private final Integer QTD_MAXIMA_PAGINAS = 5;
-
     @RequestMapping(value = {"/empresas","/empresas/{nome}"},method = RequestMethod.GET)
     public ModelAndView listar(@PathVariable(required = false) String nome,@RequestParam(defaultValue = "0") Integer pagina,Model modelo) {
-        if (pagina < 0)
-            pagina = 0;
-        if (nome == null)
-            nome = "";
+        pagina = validaPagina(pagina);
+        nome = validaNome(nome);
         List<Empresa> empresas = this.empresaServico.listar(nome);
         PagedListHolder<Empresa> empresasPaginacao = new PagedListHolder<>(empresas);
         empresasPaginacao.setPageSize(this.QTD_POR_PAGINA);
         empresasPaginacao.setPage(pagina);
         empresas = empresasPaginacao.getPageList();
         modelo.addAttribute("empresas",empresas);
-        modelo.addAttribute("nome",nome);
         modelo.addAttribute("numero_paginas",empresasPaginacao.getPageCount());
-        modelo.addAttribute("pagina_anterior",pagina - 1);
-        if (pagina > this.QTD_MAXIMA_PAGINAS)
-            modelo.addAttribute("pagina_atual",this.QTD_MAXIMA_PAGINAS);
-        else
-            modelo.addAttribute("pagina_atual",pagina);
-        modelo.addAttribute("pagina_posterior",pagina + 1);
-        modelo.addAttribute("qtd_maxima_paginas",this.QTD_MAXIMA_PAGINAS);
+        atribuicaoModelo(modelo,nome,pagina);
         ModelAndView visao = new ModelAndView("listar_empresas");
         return visao;
     }

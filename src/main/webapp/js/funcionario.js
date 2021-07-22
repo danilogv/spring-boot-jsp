@@ -86,4 +86,20 @@ $(document).ready(function(){
         $("#cpf").mask("999.999.999-99");
         return true;
     });
+    $(document).on("keyup","#nome",function() {
+        var nome = $("#nome").val();
+        $.get("/funcionarios/" + nome, function(resposta) {
+            var pagina = $.parseHTML(resposta);
+            $("#corpo").html(pagina);
+            $("#nome").focus().val("").val(nome);
+            event.preventDefault();
+        });
+    });
+    $(document).on("submit","#form_exclusao",function() {
+        var msg = "Deseja realmente excluir esse funcionário?";
+        if (confirm(msg)) {
+            return true;
+        }
+        return false;
+    });
 });
