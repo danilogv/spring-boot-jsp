@@ -55,7 +55,7 @@ public interface FuncionarioRepositorio extends JpaRepository<Funcionario,String
         "SELECT COUNT(id) > 0 " +
         "FROM funcionario " +
         "WHERE cpf = ?1 " +
-        "AND empresa_id = ?2"
+        "OR (cpf = ?1 AND empresa_id = ?2)"
     ,nativeQuery = true)
     Integer existe(String cpf,String empresaId);
 

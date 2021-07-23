@@ -3,13 +3,13 @@
     <changeSet id="2" author="danilo.vicente">
         <createTable tableName="funcionario">
             <column name="id" type="char(36)">
-                <constraints primaryKey="true" primaryKeyName="pk_funcionario" nullable="false" />
+                <constraints nullable="false" />
             </column>
             <column name="nome" type="varchar(100)">
                 <constraints nullable="false" />
             </column>
             <column name="cpf" type="char(14)">
-                <constraints nullable="false" unique="true" uniqueConstraintName="uq_cpf" />
+                <constraints nullable="false" />
             </column>
             <column name="salario" type="decimal(10,2)">
                 <constraints nullable="false" />
@@ -24,7 +24,9 @@
                 <constraints nullable="false" />
             </column>
         </createTable>
+        <addPrimaryKey tableName="funcionario" columnNames="id" constraintName="pk_funcionario" />
         <addForeignKeyConstraint baseTableName="funcionario" baseColumnNames="empresa_id" constraintName="fk_empresa" referencedTableName="empresa" referencedColumnNames="id" onDelete="CASCADE" />
+        <addUniqueConstraint tableName="funcionario" columnNames="cpf" constraintName="uq_cpf" />
         <addUniqueConstraint tableName="funcionario" columnNames="cpf,empresa_id" constraintName="uq_cpf_empresa" />
     </changeSet>
 </databaseChangeLog>

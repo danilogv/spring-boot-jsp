@@ -2,4 +2,5 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="20210206_175022_tabela_empresa.xml" relativeToChangelogFile="true" />
     <include file="20210206_180745_tabela_funcionario.xml" relativeToChangelogFile="true" />
+    <include file="20210206_181007_tabela_usuario.xml" relativeToChangelogFile="true" />
 </databaseChangeLog>
