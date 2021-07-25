@@ -30,12 +30,26 @@ public class UsuarioServico {
         return usuario;
     }
 
+    @Transactional(isolation = Isolation.READ_COMMITTED,readOnly = true)
+    public Boolean existeLogin(String login) {
+        if (this.repositorio.existeLogin(login).equals(1))
+            return true;
+        return false;
+    }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED,readOnly = true)
+    public Boolean existeUsuario(String login,String senha) {
+        if (this.repositorio.existeUsuario(login,senha).equals(1))
+            return true;
+        return false;
+    }
+
     @Transactional(isolation = Isolation.READ_COMMITTED,rollbackFor = Exception.class)
     public void inserir(Usuario usuario) {
         String id = UUID.randomUUID().toString();
         String login = usuario.getLogin();
         String senha = usuario.getSenha();
-        if (this.repositorio.existe(login,senha).equals(1)) {
+        if (this.existeLogin(login)) {
             String msg = "Usuário já cadastrado.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }
@@ -47,8 +61,8 @@ public class UsuarioServico {
         String id = usuario.getId();
         String login = usuario.getLogin();
         String senha = usuario.getSenha();
-        if (!this.buscar(id).getLogin().equals(login) && this.repositorio.existe(login,senha).equals(1)) {
-            String msg = "Empresa com CNPJ já cadastrado.";
+        if (!this.buscar(id).getLogin().equals(login) && this.existeLogin(login)) {
+            String msg = "Usuário já cadastrado.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }
         this.repositorio.altera(login,senha,id);

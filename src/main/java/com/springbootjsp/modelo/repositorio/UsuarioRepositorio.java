@@ -53,6 +53,13 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario,String> {
         "WHERE login = ?1 " +
         "AND senha = ?2"
     ,nativeQuery = true)
-    Integer existe(String login,String senha);
+    Integer existeUsuario(String login,String senha);
+
+    @Query(value =
+        "SELECT COUNT(id) > 0 " +
+        "FROM usuario " +
+        "WHERE login = ?1"
+    ,nativeQuery = true)
+    Integer existeLogin(String login);
 
 }

@@ -13,6 +13,6 @@
             </column>
         </createTable>
         <addPrimaryKey tableName="usuario" columnNames="id" constraintName="pk_usuario" />
-        <addUniqueConstraint tableName="usuario" columnNames="login,senha" constraintName="uq_login_senha" />
+        <addUniqueConstraint tableName="usuario" columnNames="login" constraintName="uq_login" />
     </changeSet>
 </databaseChangeLog>
