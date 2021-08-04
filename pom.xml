@@ -51,6 +51,11 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 			<version>2.4.3</version>
 		</dependency>
+		<dependency> <!-- Importação do spring security -->
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>2.5.3</version>
+		</dependency>
 	</dependencies>
 
 	<build>

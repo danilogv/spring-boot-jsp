@@ -43,9 +43,10 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario,String> {
     @Query(value =
         "SELECT * " +
         "FROM usuario " +
-        "WHERE id = ?1"
+        "WHERE id = ?1 " +
+        "OR login = ?2"
     ,nativeQuery = true)
-    Usuario buscar(String id);
+    Usuario buscar(String id,String login);
 
     @Query(value =
         "SELECT COUNT(id) > 0 " +

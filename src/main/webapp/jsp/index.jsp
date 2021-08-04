@@ -10,7 +10,7 @@
         <script src="http://localhost:8080/js/usuario.js"> </script>
     </head>
     <body>
-        <form id="form_salvar" method="get" action="/login">
+        <form id="form_salvar" method="post" action="/login">
             <div class="container-fluid mt-2">
                 <c:if test="${not empty mensagemSucesso}">
                     <div class="alert alert-success" role="alert"> ${mensagemSucesso} </div>
@@ -20,17 +20,25 @@
                     <div class="alert alert-danger" role="alert"> ${mensagemErro} </div>
                     <br/>
                 </c:if>
+                <c:if test="${param.logout != null}">
+                    <div class="alert alert-success" role="alert"> Sessão encerrada </div>
+                    <br/>
+                </c:if>
+                <c:if test="${param.error != null}">
+                    <div class="alert alert-danger" role="alert"> Usuário inválido </div>
+                    <br/>
+                </c:if>
                 <div class="row">
                     <div class="col-12 col-sm-4">
                         <label> Login : </label>
-                        <input type="text" id="login" name="login" value="${login}" class="form-control" />
+                        <input type="text" id="username" name="username" class="form-control" />
                     </div>
                 </div>
                 <br/>
                 <div class="row">
                     <div class="col-12 col-sm-4">
                         <label> Senha : </label>
-                        <input type="password" id="senha" name="senha" min="5" max="15" class="form-control" />
+                        <input type="password" id="password" name="password" min="5" max="15" class="form-control" />
                     </div>
                 </div>
                 <br />

@@ -4,6 +4,7 @@ import com.springbootjsp.modelo.dominio.Usuario;
 import com.springbootjsp.modelo.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +26,8 @@ public class UsuarioServico {
     }
 
     @Transactional(isolation = Isolation.READ_COMMITTED,readOnly = true)
-    public Usuario buscar(String id) {
-        Usuario usuario = this.repositorio.buscar(id);
+    public Usuario buscar(String id,String login) {
+        Usuario usuario = this.repositorio.buscar(id,login);
         return usuario;
     }
 
@@ -48,7 +49,7 @@ public class UsuarioServico {
     public void inserir(Usuario usuario) {
         String id = UUID.randomUUID().toString();
         String login = usuario.getLogin();
-        String senha = usuario.getSenha();
+        String senha = new BCryptPasswordEncoder().encode(usuario.getSenha());
         if (this.existeLogin(login)) {
             String msg = "Usuário já cadastrado.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
@@ -60,8 +61,8 @@ public class UsuarioServico {
     public void alterar(Usuario usuario) {
         String id = usuario.getId();
         String login = usuario.getLogin();
-        String senha = usuario.getSenha();
-        if (!this.buscar(id).getLogin().equals(login) && this.existeLogin(login)) {
+        String senha = new BCryptPasswordEncoder().encode(usuario.getSenha());
+        if (!this.buscar(id,login).getLogin().equals(login) && this.existeLogin(login)) {
             String msg = "Usuário já cadastrado.";
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,msg);
         }

@@ -97,7 +97,7 @@ public final class Funcionario {
         if (objeto == null || getClass() != objeto.getClass())
             return false;
         Funcionario funcionario = (Funcionario) objeto;
-        if (this.id.equals(funcionario.getId()) || this.cpf.equals(funcionario.getCpf()))
+        if (this.id.equals(funcionario.getId()))
             return true;
         if (this.cpf.equals(funcionario.getCpf()) && this.empresa.getId().equals(funcionario.getEmpresa().getId()))
             return true;

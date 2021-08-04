@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $(document).on("submit","#form_salvar",function() {
-        var login = $("#login").val();
-        var senha = $("#senha").val();
+        var login = $("#username").val();
+        var senha = $("#password").val();
         if (login === "") {
             alert("Informe o LOGIN.");
             return false;

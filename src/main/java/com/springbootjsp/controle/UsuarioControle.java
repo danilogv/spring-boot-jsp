@@ -24,20 +24,6 @@ public class UsuarioControle {
         return visao;
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public RedirectView login(@ModelAttribute Usuario usuario,RedirectAttributes atributos) {
-        RedirectView visao = new RedirectView("/empresas");
-        if (this.usuarioServico.existeUsuario(usuario.getLogin(),usuario.getSenha()))
-            visao.setUrl("/empresas");
-        else {
-            String mensagem = "Login/Senha inválido.";
-            atributos.addFlashAttribute("mensagemErro",mensagem);
-            atributos.addFlashAttribute("login",usuario.getLogin());
-            visao.setUrl("/");
-        }
-        return visao;
-    }
-
     @RequestMapping(value = "/usuario",method = RequestMethod.GET)
     public ModelAndView formulario() {
         ModelAndView visao = new ModelAndView("formulario_usuario");
