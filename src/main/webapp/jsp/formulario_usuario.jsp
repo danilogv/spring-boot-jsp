@@ -10,6 +10,9 @@
         <script src="http://localhost:8080/js/usuario.js"> </script>
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#"> Sys Contábil </a>
+        </nav>
         <form id="form_salvar" method="post" action="/usuario">
             <div class="container-fluid mt-2">
                 <c:if test="${not empty mensagemErro}">
