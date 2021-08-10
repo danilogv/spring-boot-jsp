@@ -56,6 +56,12 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 			<version>2.5.3</version>
 		</dependency>
+		<dependency> <!-- Importação do jasper para relatórios -->
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.17.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

@@ -1,4 +1,4 @@
-package com.springbootjsp.modelo.dominio;
+package com.springbootjsp.modelo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

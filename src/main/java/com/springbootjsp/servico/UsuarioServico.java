@@ -1,7 +1,7 @@
-package com.springbootjsp.modelo.servico;
+package com.springbootjsp.servico;
 
-import com.springbootjsp.modelo.dominio.Usuario;
-import com.springbootjsp.modelo.repositorio.UsuarioRepositorio;
+import com.springbootjsp.modelo.Usuario;
+import com.springbootjsp.repositorio.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <title> Empresas </title>
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/estilo.css" />
         <script src="http://localhost:8080/js/jquery.js"> </script>
         <script src="http://localhost:8080/js/empresa.js"> </script>
     </head>
@@ -163,6 +164,11 @@
                 <a href="/empresa">
                     <button type="button" class="btn btn-primary"> Cadastrar </button>
                 </a>
+            </div>
+        </div>
+        <div class="rodape fixed-bottom">
+            <div class="texto-rodape">
+                &copyCopyright por Danilo Gonçalves Vicente
             </div>
         </div>
     </body>

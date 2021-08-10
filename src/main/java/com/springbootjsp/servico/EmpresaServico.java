@@ -1,7 +1,7 @@
-package com.springbootjsp.modelo.servico;
+package com.springbootjsp.servico;
 
-import com.springbootjsp.modelo.dominio.Empresa;
-import com.springbootjsp.modelo.repositorio.EmpresaRepositorio;
+import com.springbootjsp.modelo.Empresa;
+import com.springbootjsp.repositorio.EmpresaRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;

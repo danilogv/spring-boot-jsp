@@ -1,7 +1,7 @@
 package com.springbootjsp.controle;
 
-import com.springbootjsp.modelo.dominio.Usuario;
-import com.springbootjsp.modelo.servico.UsuarioServico;
+import com.springbootjsp.modelo.Usuario;
+import com.springbootjsp.servico.UsuarioServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;

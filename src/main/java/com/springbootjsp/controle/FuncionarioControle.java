@@ -1,9 +1,9 @@
 package com.springbootjsp.controle;
 
-import com.springbootjsp.modelo.dominio.Empresa;
-import com.springbootjsp.modelo.dominio.Funcionario;
-import com.springbootjsp.modelo.servico.EmpresaServico;
-import com.springbootjsp.modelo.servico.FuncionarioServico;
+import com.springbootjsp.modelo.Empresa;
+import com.springbootjsp.modelo.Funcionario;
+import com.springbootjsp.servico.EmpresaServico;
+import com.springbootjsp.servico.FuncionarioServico;
 import com.springbootjsp.utilitario.Data;
 import com.springbootjsp.utilitario.Moeda;
 import org.springframework.beans.factory.annotation.Autowired;

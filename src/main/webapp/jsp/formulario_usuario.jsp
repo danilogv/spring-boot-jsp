@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <title> Usuário </title>
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/estilo.css" />
         <script src="http://localhost:8080/js/jquery.js"> </script>
         <script src="http://localhost:8080/js/usuario.js"> </script>
     </head>
@@ -39,5 +40,10 @@
                 </a>
             </div>
         </form>
+        <div class="rodape fixed-bottom">
+            <div class="texto-rodape">
+                &copyCopyright por Danilo Gonçalves Vicente
+            </div>
+        </div>
     </body>
 </html>

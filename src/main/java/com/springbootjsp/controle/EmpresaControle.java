@@ -1,7 +1,7 @@
 package com.springbootjsp.controle;
 
-import com.springbootjsp.modelo.dominio.Empresa;
-import com.springbootjsp.modelo.servico.EmpresaServico;
+import com.springbootjsp.modelo.Empresa;
+import com.springbootjsp.servico.EmpresaServico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;

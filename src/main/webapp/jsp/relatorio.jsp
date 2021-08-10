@@ -4,9 +4,11 @@
 <html lang="pt-br">
     <head>
         <meta charset="utf-8" />
-        <title> Empresa </title>
+        <title> Relatórios </title>
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/estilo.css" />
+        <script src="http://localhost:8080/js/jquery.js"> </script>
+        <script src="http://localhost:8080/js/relatorio.js"> </script>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -31,15 +33,24 @@
                 </ul>
             </div>
         </nav>
-        <div class="mt-2 ml-2">
-            <h1> ${empresa.nome} </h1>
-            <br/>
-            <p class="font-weight-light"> CNPJ : ${empresa.cnpj} </p>
-            <br/>
-            <a href="/empresas">
-                <button type="button" class="btn btn-primary"> Voltar </button>
-            </a>
-        </div>
+        <form id="form_salvar" method="get" action="/relatorio">
+            <div class="container-fluid mt-3">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipo_relatorio" id="empresa" value="empresa">
+                    <label class="form-check-label" for="empresa">
+                        Relatório de Empresas
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="tipo_relatorio" id="funcionario" value="funcionario">
+                    <label class="form-check-label" for="funcionario">
+                        Relatório de Funcionários Ativos
+                    </label>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-primary"> Gerar </button>
+            </div>
+        </form>
         <div class="rodape fixed-bottom">
             <div class="texto-rodape">
                 &copyCopyright por Danilo Gonçalves Vicente

@@ -1,6 +1,6 @@
-package com.springbootjsp.modelo.repositorio;
+package com.springbootjsp.repositorio;
 
-import com.springbootjsp.modelo.dominio.Usuario;
+import com.springbootjsp.modelo.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

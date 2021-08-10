@@ -1,0 +1,13 @@
+.rodape {
+    position: fixed;
+    height: 10vh;
+    bottom: 0;
+    width: 100%;
+    background-color: darkgrey;
+    color: white;
+}
+
+.texto-rodape {
+    margin-left: 1vh;
+    margin-top: 3vh;
+}

@@ -6,6 +6,7 @@
         <meta charset="utf-8" />
         <title> Funcionário </title>
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
+        <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/estilo.css" />
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -48,6 +49,11 @@
             <a href="/funcionarios">
                 <button type="button" class="btn btn-primary"> Voltar </button>
             </a>
+        </div>
+        <div class="rodape fixed-bottom">
+            <div class="texto-rodape">
+                &copyCopyright por Danilo Gonçalves Vicente
+            </div>
         </div>
     </body>
 </html>
