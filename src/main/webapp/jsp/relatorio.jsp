@@ -33,24 +33,30 @@
                 </ul>
             </div>
         </nav>
-        <form id="form_salvar" method="get" action="/relatorio">
-            <div class="container-fluid mt-3">
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="tipo_relatorio" id="empresa" value="empresa">
-                    <label class="form-check-label" for="empresa">
-                        Relatório de Empresas
-                    </label>
+        <div class="container-fluid mt-2">
+            <c:if test="${not empty mensagem}">
+                <div class="alert alert-danger" role="alert"> ${mensagem} </div>
+                <br/>
+            </c:if>
+            <form id="form_salvar" method="get" action="/relatorio">
+                <div class="container-fluid mt-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tipo_relatorio" id="empresa" value="empresa">
+                        <label class="form-check-label" for="empresa">
+                            Relatório de Empresas
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="tipo_relatorio" id="funcionario" value="funcionario">
+                        <label class="form-check-label" for="funcionario">
+                            Relatório de Funcionários Ativos
+                        </label>
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-primary"> Gerar </button>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="tipo_relatorio" id="funcionario" value="funcionario">
-                    <label class="form-check-label" for="funcionario">
-                        Relatório de Funcionários Ativos
-                    </label>
-                </div>
-                <br />
-                <button type="submit" class="btn btn-primary"> Gerar </button>
-            </div>
-        </form>
+            </form>
+        </div>
         <div class="rodape fixed-bottom">
             <div class="texto-rodape">
                 &copyCopyright por Danilo Gonçalves Vicente
