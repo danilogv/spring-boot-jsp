@@ -1,38 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.0.0.final using JasperReports Library version 6.0.0  -->
-<!-- 2021-08-11T12:39:29 -->
+<!-- 2021-08-20T14:52:04 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="empresa" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="73665dd2-16cb-4194-9aee-35d8c7df8e62">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="TITULO" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="220" y="20" width="100" height="30" uuid="21615eeb-d014-4464-a940-ed69e185673b"/>
-				<text><![CDATA[Danilo]]></text>
-			</staticText>
-		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cnpj" class="java.lang.String"/>
+	<group name="group" isReprintHeaderOnEachPage="true">
+		<groupHeader>
+			<band height="85">
+				<property name="local_mesure_unitheight" value="pixel"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<textField>
+					<reportElement key="" x="0" y="5" width="554" height="35" forecolor="#FF0400" uuid="05e99957-7deb-459a-95b4-eba0213cfecf"/>
+					<textElement textAlignment="Center">
+						<font fontName="Times New Roman" size="14" isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{TITULO}]]></textFieldExpression>
+				</textField>
+				<rectangle>
+					<reportElement x="0" y="48" width="554" height="30" backcolor="#999999" uuid="fef9872d-bf56-4666-a4dc-8673368feeba">
+						<property name="local_mesure_unitheight" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					</reportElement>
+				</rectangle>
+				<textField>
+					<reportElement x="0" y="48" width="380" height="30" forecolor="#FFFFFF" backcolor="#A19F9F" uuid="28a13c1c-04dd-499f-b40f-4a9696548430"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["Nome"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="381" y="48" width="173" height="30" forecolor="#FFFFFF" backcolor="#A19F9F" uuid="63eac9e4-c6fb-4a49-ae7b-39fd283285e7"/>
+					<box leftPadding="5"/>
+					<textElement verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA["CNPJ"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="380" y="48" width="1" height="30" uuid="8421609a-3a8d-4d25-accf-1759be16d30a"/>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="21" splitType="Stretch">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" uuid="1de6562f-01d5-4b3c-920d-620de9a9825d"/>
+			</rectangle>
+			<textField>
+				<reportElement x="381" y="0" width="173" height="20" uuid="3cc07482-5159-4391-b8c4-fa28b863d111"/>
+				<box leftPadding="5" rightPadding="0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="380" height="20" uuid="4e0d7fff-9b21-47d9-b6e6-ee5f2ccbeb9b"/>
+				<box leftPadding="5"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="380" y="0" width="1" height="20" uuid="2c1d1ca8-519d-440b-9538-127136943749"/>
+			</line>
+		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="35">
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="455" y="5" width="100" height="25" uuid="9f8ceae6-d8f8-4113-8a25-a7449b1b6c61"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
