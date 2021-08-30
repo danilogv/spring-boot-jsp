@@ -52,6 +52,7 @@
                         </label>
                     </div>
                     <br />
+                    <input type="hidden" name="empresa" value="165cbb61-fb1b-4de7-9592-3a4d6f58a823" />
                     <button type="submit" class="btn btn-primary"> Gerar </button>
                 </div>
             </form>
