@@ -78,7 +78,6 @@
                                         <option value="${empresa.id}"> ${empresa.nome} </option>
                                     </c:otherwise>
                                 </c:choose>
-
                             </c:forEach>
                         </select>
                     </div>

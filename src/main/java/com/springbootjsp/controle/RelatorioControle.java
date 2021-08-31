@@ -12,6 +12,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +38,9 @@ public class RelatorioControle {
     private FuncionarioServico funcionarioServico;
 
     @RequestMapping(value = "/relatorios",method = RequestMethod.GET)
-    public ModelAndView relatorios() {
+    public ModelAndView relatorios(Model modelo) {
+        List<Empresa> empresas = this.empresaServico.listar("");
+        modelo.addAttribute("empresas",empresas);
         ModelAndView visao = new ModelAndView("relatorio");
         return visao;
     }
@@ -47,7 +50,7 @@ public class RelatorioControle {
         String titulo,pasta;
         try {
             switch(tipo) {
-                case "empresa":
+                case "relatorio-empresa":
                     List<Empresa> empresas = this.empresaServico.listar("");
                     if (empresas == null || empresas.size() == 0) {
                         String msg = "Não existem empresas cadastradas.";
@@ -57,7 +60,7 @@ public class RelatorioControle {
                     pasta = "relatorio/empresa.jasper";
                     this.gerarRelatorio(titulo,pasta,resposta,empresas,null);
                     break;
-                case "funcionario":
+                case "relatorio-funcionario":
                     List<Funcionario> funcionarios = this.funcionarioServico.listar("");
                     List<Funcionario> funcionariosAtivos = new ArrayList<>();
                     for (Funcionario funcionario : funcionarios) {

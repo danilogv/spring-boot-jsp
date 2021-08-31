@@ -39,20 +39,35 @@
             </c:if>
             <form id="form_salvar" method="get" action="/relatorio">
                 <div class="container-fluid mt-3">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tipo_relatorio" id="empresa" value="empresa">
-                        <label class="form-check-label" for="empresa">
-                            Relatório de Empresas
-                        </label>
+                    <div class="row">
+                        <div class="col-12 col-sm-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo_relatorio" id="relatorio-empresa" value="relatorio-empresa">
+                                <label class="form-check-label" for="relatorio-empresa">
+                                    Relatório de Empresas
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="tipo_relatorio" id="funcionario" value="funcionario">
-                        <label class="form-check-label" for="funcionario">
-                            Relatório de Funcionários Ativos
-                        </label>
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="tipo_relatorio" id="relatorio-funcionario" value="relatorio-funcionario">
+                                <label class="form-check-label" for="relatorio-funcionario">
+                                    Relatório de Funcionários Ativos por empresa
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <select id="empresa" name="empresa" class="form-control">
+                                <option value=""> Selecione ... </option>
+                                <c:forEach items="${empresas}" var="empresa">
+                                    <option value="${empresa.id}"> ${empresa.nome} </option>
+                                </c:forEach>
+                            </select>
+                        </div>
                     </div>
                     <br />
-                    <input type="hidden" name="empresa" value="165cbb61-fb1b-4de7-9592-3a4d6f58a823" />
                     <button type="submit" class="btn btn-primary"> Gerar </button>
                 </div>
             </form>
