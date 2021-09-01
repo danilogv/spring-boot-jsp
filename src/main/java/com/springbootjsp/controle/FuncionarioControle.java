@@ -49,7 +49,7 @@ public class FuncionarioControle extends ObjetoControle {
         ModelAndView visao = new ModelAndView();
         List<Empresa> empresas = this.empresaServico.listar("");
         modelo.addAttribute("empresas",empresas);
-        modelo.addAttribute("data_maxima",Data.formatar(LocalDate.now()));
+        modelo.addAttribute("data_maxima",Data.formatarPadraoAmericano(LocalDate.now()));
         if (id != null) {
             Funcionario funcionario = this.funcionarioServico.buscar(id);
             modelo.addAttribute("funcionario",funcionario);
@@ -58,7 +58,7 @@ public class FuncionarioControle extends ObjetoControle {
                 visao.setViewName("formulario_funcionario");
             else {
                 if (funcionario.getDataDesligamento() != null) {
-                    modelo.addAttribute("dataDesligamento",Data.formatar(funcionario.getDataDesligamento()));
+                    modelo.addAttribute("dataDesligamento",Data.formatarPadraoBrasileiro(funcionario.getDataDesligamento()));
                 }
                 visao.setViewName("visualizar_funcionario");
             }
