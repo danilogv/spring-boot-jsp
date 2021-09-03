@@ -18,7 +18,7 @@
             </button>
             <div class="collapse navbar-collapse" id="barra-navegacao">
                 <ul class="navbar-nav">
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="/empresas"> Empresas </a>
                     </li>
                     <li class="nav-item">
@@ -36,22 +36,20 @@
         <div class="container-fluid mt-2">
             <c:if test="${not empty mensagemSucesso}">
                 <div class="alert alert-success" role="alert"> ${mensagemSucesso} </div>
-                <br/>
             </c:if>
             <c:if test="${not empty mensagemErro}">
                 <div class="alert alert-danger" role="alert"> ${mensagemErro} </div>
-                <br/>
             </c:if>
             <div class="ml-3">
                 <label> Pesquisar por nome : </label>
                 <div class="row">
-                    <div class="col-5 col-sm-5">
+                    <div class="col-12 col-sm-5">
                         <input type="text" id="nome" name="nome" value="${nome}" class="form-control" autofocus />
                     </div>
                 </div>
-                <br/> <br/>
-                <h1> Empresas </h1>
-                <div class="row">
+                <br/>
+                <h3> Empresas </h3>
+                <div class="row barra-rolagem">
                     <div class="col-12 col-sm-9">
                         <table class="table">
                             <c:forEach var="empresa" items="${empresas}">
@@ -79,7 +77,7 @@
                         </table>
                     </div>
                 </div>
-                <br/> <br/>
+                <br/>
                 <ul class="pagination">
                     <li class="page-item">
                         <c:choose>
@@ -160,13 +158,13 @@
                         </c:choose>
                     </li>
                 </ul>
-                <br/> <br/>
+                <br/>
                 <a href="/empresa">
                     <button type="button" class="btn btn-primary"> Cadastrar </button>
                 </a>
             </div>
         </div>
-        <div class="rodape fixed-bottom">
+        <div class="fixed-bottom rodape">
             <div class="texto-rodape">
                 &copyCopyright por Danilo Gonçalves Vicente
             </div>

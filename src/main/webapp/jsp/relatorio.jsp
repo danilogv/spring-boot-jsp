@@ -37,6 +37,7 @@
             <c:if test="${not empty mensagem}">
                 <div class="alert alert-danger" role="alert"> ${mensagem} </div>
             </c:if>
+            <br/>
             <form id="form_salvar" method="get" action="/relatorio">
                 <div class="container-fluid mt-3">
                     <div class="row">

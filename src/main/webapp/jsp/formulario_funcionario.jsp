@@ -34,6 +34,7 @@
                 </ul>
             </div>
         </nav>
+        <br/>
         <form id="form_salvar" method="post" action="/funcionario">
             <div class="container-fluid mt-2">
                 <div class="row">
