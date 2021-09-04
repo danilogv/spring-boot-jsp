@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
     <head>
-        <meta charset="utf-8" />
+        <meta charset="utf-8" name="viewport" content="width=device-width,initial-scale=1" />
         <title> Usuário </title>
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/bootstrap.css" />
         <link rel="stylesheet" type="text/css" href="http://localhost:8080/css/estilo.css" />
@@ -12,26 +12,22 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#"> Sys Contábil </a>
+            <a class="navbar-brand mx-1" href="#"> Sys Contábil </a>
         </nav>
         <br/>
         <form id="form_salvar" method="post" action="/login">
             <div class="container-fluid mt-2">
                 <c:if test="${not empty mensagemSucesso}">
                     <div class="alert alert-success" role="alert"> ${mensagemSucesso} </div>
-                    <br/>
                 </c:if>
                 <c:if test="${not empty mensagemErro}">
                     <div class="alert alert-danger" role="alert"> ${mensagemErro} </div>
-                    <br/>
                 </c:if>
                 <c:if test="${param.logout != null}">
                     <div class="alert alert-success" role="alert"> Sessão encerrada </div>
-                    <br/>
                 </c:if>
                 <c:if test="${param.error != null}">
                     <div class="alert alert-danger" role="alert"> Usuário inválido </div>
-                    <br/>
                 </c:if>
                 <div class="row">
                     <div class="col-12 col-sm-4">
@@ -52,10 +48,6 @@
                 <a href="/usuario" class="link-primary"> Não é cadastrado? Então clique aqui e cadastre-se! </a>
             </div>
         </form>
-        <div class="rodape fixed-bottom">
-            <div class="texto-rodape">
-                &copyCopyright por Danilo Gonçalves Vicente
-            </div>
-        </div>
+        <c:import url="rodape.jsp" />
     </body>
 </html>
