@@ -8,8 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 @Entity
 @Table(name = "usuario")
@@ -49,14 +49,6 @@ public class Usuario implements UserDetails {
         this.senha = senha;
     }
 
-    public Usuario(String login) {
-        setLogin(login);
-    }
-
-    public Usuario() {
-
-    }
-
     @Override
     public boolean equals(Object objeto) {
         if (this == objeto)
@@ -73,7 +65,7 @@ public class Usuario implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
